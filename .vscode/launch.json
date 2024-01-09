@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Web Extension",
+      "type": "extensionHost",
+      "debugWebWorkerHost": true,
+      "request": "launch",
+      "args": [
+        "--disable-extensions",
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "--extensionDevelopmentKind=web",
+        "${workspaceFolder}/fixtures"
+      ],
+      "outFiles": ["${workspaceFolder}/dist/web/**/*.js"],
+      "autoAttachChildProcesses": true,
+      "preLaunchTask": "npm: dev:web"
+    },
+    {
+      "name": "Run Node Extension",
+      "type": "extensionHost",
+      "debugWebWorkerHost": true,
+      "request": "launch",
+      "args": [
+        "--disable-extensions",
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "${workspaceFolder}/fixtures"
+      ],
+      "outFiles": ["${workspaceFolder}/dist/node/**/*.js"],
+      "autoAttachChildProcesses": true,
+      "preLaunchTask": "npm: dev:node"
+    }
+  ]
+}
