@@ -29,13 +29,13 @@ export const onInitialize =
         // signatureHelpProvider: {
         //   triggerCharacters: ['('],
         // },
-        // definitionProvider: true,
+        definitionProvider: true,
         hoverProvider: true,
         // codeLensProvider: {
         //   resolveProvider: false,
         //   workDoneProgress: false,
         // },
-        // documentSymbolProvider: true,
+        documentSymbolProvider: true,
         // typeDefinitionProvider: true,
         // referencesProvider: true,
         // implementationProvider: true,

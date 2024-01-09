@@ -44,56 +44,37 @@ export const onHover =
     }
 
     // 4. 其他情况
-    const getContent = (c: string[]): MarkupContent => ({
-      kind: MarkupKind.Markdown,
-      value: ['```solidity', ...c, '```'].join('\n'),
-    });
-
     const getHover = (n: SyntaxNode, c: string[]): Hover => ({
       range: document.getNodeRange(n),
-      contents: getContent(c),
+      contents: {
+        kind: MarkupKind.Markdown,
+        value: ['```solidity', ...c, '```'].join('\n'),
+      },
     });
-
-    const getDefaultHover = () => getHover(target, [node2string(target)]);
 
     let hover: Hover | null = null;
 
     if (path.matches({ type: 'ImportDirective' })) {
-      hover = getDefaultHover();
+      hover = getHover(target, [node2string(target)]);
     } else if (path.matches({ type: 'Path' }, { type: 'ImportDirective' })) {
-      hover = getDefaultHover();
+      hover = getHover(parent!, [node2string(parent!)]);
+    } else if (path.matches({}, { type: 'VariableDeclaration' })) {
+      hover = getHover(parent!, [node2string(parent!)]);
+    } else if (path.matches({}, { type: 'ContractDefinition' })) {
+      hover = getHover(parent!, [node2string(parent!)]);
+    } else if (path.matches({}, { type: 'EnumDefinition' })) {
+      hover = getHover(parent!, [node2string(parent!)]);
+    } else if (path.matches({}, { type: 'UserDefinedValueTypeDefinition' })) {
+      hover = getHover(parent!, [node2string(parent!)]);
+    } else if (path.matches({}, { type: 'ErrorDefinition' })) {
+      hover = getHover(parent!, [node2string(parent!)]);
+    } else if (path.matches({}, { type: 'EventDefinition' })) {
+      hover = getHover(parent!, [node2string(parent!)]);
+    } else if (path.matches({}, { type: 'StructDefinition' })) {
+      hover = getHover(parent!, [node2string(parent!)]);
+    } else if (path.matches({ type: 'Identifier' }, { type: 'FunctionDefinition' })) {
+      hover = getHover(parent!, [node2string(parent!)]);
     }
 
-    // const universal: [TraverseFilter, Hover][] = [
-    //   // import "xxx";
-    //   [{ type: 'ImportDirective' }, getDefaultHover()],
-    //   // vars
-    //   [
-    //     { type: 'VariableDeclaration' },
-    //     getHover(target, [
-    //       ((target as any)?.isStateVar ? '(state variable) ' : '(local variable) ') +
-    //         node2string(target),
-    //     ]),
-    //   ],
-    //   [
-    //     { parentFilter: { type: 'VariableDeclaration' } },
-    //     getHover(parent, [
-    //       ((parent as any)?.isStateVar ? '(state variable) ' : '(local variable) ') +
-    //         node2string(parent),
-    //     ]),
-    //   ],
-    //   // contract Foo {}
-    //   [{ type: 'ContractDefinition' }, getDefaultHover()],
-    //   [{ type: 'FunctionDefinition' }, getDefaultHover()],
-    //   [{ type: 'PragmaDirective' }, getDefaultHover()],
-    //   [{ type: 'EventDefinition' }, getDefaultHover()],
-    //   [{ type: 'EmitStatement', eventCall: { type: 'FunctionCall' } }, getDefaultHover()],
-    // ];
-
-    // const universalItem = universal.find(([f]) => matches(f)(target, parent))?.[1];
-
-    // if (universalItem) return universalItem;
-
-    console.log(hover);
     return hover;
   };

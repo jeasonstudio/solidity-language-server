@@ -11,6 +11,7 @@ import {
   TraverseFilter,
   TraversePath,
   traverse,
+  SourceUnit,
 } from '../common/parser';
 
 const debug = createDebug('core:text-document');
@@ -42,7 +43,7 @@ export class SolidityTextDocument extends SolidityBaseTextDocument implements Te
   public ctx: Context = globalThis.GlobalContext;
 
   // File AST parsed by `solidity-antlr4`
-  public ast: SyntaxNode | null = null;
+  public ast: SourceUnit | null = null;
   public tokens: SyntaxToken[] = [];
 
   public constructor(uri: string, languageId: string, version: number, content: string) {
@@ -62,7 +63,7 @@ export class SolidityTextDocument extends SolidityBaseTextDocument implements Te
     try {
       const content = this.getText();
       if (!content) return;
-      this.ast = parse(content, { tolerant: true });
+      this.ast = parse<SourceUnit>(content, { tolerant: true });
       this.tokens = tokenizer(content, { tolerant: true });
     } catch (error) {
       // ignore
