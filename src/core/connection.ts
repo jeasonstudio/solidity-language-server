@@ -4,6 +4,7 @@ import { SolidityTextDocument } from './text-document';
 import { TextDocuments } from './common/text-documents';
 import { onExit, onInitialize, onInitialized } from './initialize';
 import { enableDebug } from './common/debug';
+import { onHover } from './definition';
 
 enableDebug('*');
 
@@ -21,7 +22,7 @@ export const listen = (connection: Connection): Context => {
   // connection.onCompletion(onCompletion(context));
   // connection.onSignatureHelp(onSignatureHelp(context));
   // connection.onDefinition(onDefinition(context));
-  // connection.onHover(onHover(context));
+  connection.onHover(onHover(context));
   // connection.onCodeLens(onCodeLens(context));
   // connection.onDocumentSymbol(onDocumentSymbol(context));
   // connection.onTypeDefinition(onTypeDefinition(serverState));

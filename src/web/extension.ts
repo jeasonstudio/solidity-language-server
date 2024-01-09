@@ -23,7 +23,7 @@ export function createClient(context: vscode.ExtensionContext) {
 
   const serverMain = vscode.Uri.joinPath(context.extensionUri, 'dist/web/server.js');
   const worker = new Worker(serverMain.toString(true));
-  const client = new LanguageClient('solidity', 'Solidity Language Server', clientOptions, worker);
+  const client = new LanguageClient('solidity', 'Solidity', clientOptions, worker);
   fileWatcher.listen(client);
 
   return client;

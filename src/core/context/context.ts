@@ -1,4 +1,4 @@
-import { Connection } from 'vscode-languageserver/browser';
+import { Connection } from 'vscode-languageserver';
 import { TextDocuments } from '../common/text-documents';
 import { SolidityTextDocument } from '../text-document';
 

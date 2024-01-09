@@ -26,7 +26,6 @@ export function createClient(context: vscode.ExtensionContext) {
     },
   };
 
-  // const serverMain = context.asAbsolutePath('dist/node/server.js');
   const serverMain = vscode.Uri.joinPath(context.extensionUri, 'dist/node/server.js').fsPath;
 
   // If the extension is launched in debug mode then the debug server options are used
@@ -38,12 +37,7 @@ export function createClient(context: vscode.ExtensionContext) {
       transport: TransportKind.ipc,
     },
   };
-  const client = new LanguageClient(
-    'solidity',
-    'Solidity Language Server',
-    serverOptions,
-    clientOptions,
-  );
+  const client = new LanguageClient('solidity', 'Solidity', serverOptions, clientOptions);
   fileWatcher.listen(client);
 
   return client;

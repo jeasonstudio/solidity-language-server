@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Language server protocol implement for Solidity.",
   "scripts": {
-    "vscodeweb": "vscode-test-web --extensionDevelopmentPath=. --open-devtools --quality=stable ./fixtures",
+    "vscodeweb": "vscode-test-web --extensionDevelopmentPath=. --open-devtools --quality=stable ./contracts",
     "prepublishOnly": "pnpm run build",
     "dev": "pnpm run \"/^dev:.+/\"",
     "dev:web": "webpack --config webpack.web.config.js --watch",

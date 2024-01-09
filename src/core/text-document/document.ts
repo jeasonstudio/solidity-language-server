@@ -2,12 +2,18 @@ import { Position, Range, TextDocumentContentChangeEvent } from 'vscode-language
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { SolidityBaseTextDocument } from './base';
 import { createDebug } from '../common/debug';
-// import { astTypes, parserTypes, tokenize, parse, visit } from '../common/parser';
-// import { enterVisitors } from '../common/visitors';
 import { Context } from '../context';
-import { SyntaxNode, SyntaxToken, parse, tokenizer } from '../common/parser';
+import {
+  SyntaxNode,
+  SyntaxToken,
+  parse,
+  tokenizer,
+  TraverseFilter,
+  TraversePath,
+  traverse,
+} from '../common/parser';
 
-const debug = createDebug('extension:language-server:document');
+const debug = createDebug('core:text-document');
 
 export class SolidityTextDocument extends SolidityBaseTextDocument implements TextDocument {
   public static create(
@@ -93,21 +99,20 @@ export class SolidityTextDocument extends SolidityBaseTextDocument implements Te
   /**
    * 从 AST Tree 中找到当前位置的所有 Node List
    * @param position vscode position
-   * @returns [Node, ParentNode] List
+   * @returns Path[]
    */
-  // public getNodesAt(position: Position, visitors: astTypes.ASTNodeTypeString[] = enterVisitors) {
-  //   const offset = this.offsetAt(position);
-  //   const nodes: [astTypes.ASTNode, astTypes.ASTNode][] = [];
-  //   const visitorFn = (n: astTypes.ASTNode, pn: astTypes.ASTNode) => {
-  //     const [start, end] = n.range ?? [0, 0];
-  //     if (offset >= start && offset <= end) {
-  //       nodes.push([n, pn]);
-  //     }
-  //   };
-  //   const visitor = Object.fromEntries(visitors.map((v) => [v, visitorFn]));
-  //   visit(this.ast, visitor);
-  //   return nodes;
-  // }
+  public getNodesAt(position: Position, filter?: TraverseFilter, parentFilter?: TraverseFilter) {
+    const offset = this.offsetAt(position);
+    const paths: TraversePath[] = [];
+    const enter = (p: TraversePath) => {
+      const [start, end] = p.node.range ?? [0, 0];
+      if (offset >= start && offset <= end) {
+        if (!filter || (filter && p.matches(filter, parentFilter))) paths.push(p);
+      }
+    };
+    traverse(this.ast!, { enter });
+    return paths;
+  }
 
   /**
    * 从 AST Tree 中找到当前位置最近的 Node
@@ -116,11 +121,11 @@ export class SolidityTextDocument extends SolidityBaseTextDocument implements Te
    * @param visitors ASTNodeTypeString[]
    * @returns [Node, ParentNode]
    */
-  // public getNodeAt(position: Position, visitors: astTypes.ASTNodeTypeString[] = enterVisitors) {
-  //   const nodes = this.getNodesAt(position, visitors);
-  //   const [node, parent] = nodes[nodes.length - 1] ?? [null, null];
-  //   return [node, parent] as [astTypes.ASTNode, astTypes.ASTNode];
-  // }
+  public getNodeAt(position: Position, filter?: TraverseFilter, parentFilter?: TraverseFilter) {
+    const paths = this.getNodesAt(position, filter, parentFilter);
+    const target = paths[paths.length - 1];
+    return target ?? null;
+  }
 
   // public getIdentifierReferenceNode(identifier: astTypes.Identifier) {
   //   const name = identifier.name;

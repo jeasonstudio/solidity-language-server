@@ -10,7 +10,7 @@
         "--disable-extensions",
         "--extensionDevelopmentPath=${workspaceFolder}",
         "--extensionDevelopmentKind=web",
-        "${workspaceFolder}/fixtures"
+        "${workspaceFolder}/contracts"
       ],
       "outFiles": ["${workspaceFolder}/dist/web/**/*.js"],
       "autoAttachChildProcesses": true,
@@ -24,7 +24,7 @@
       "args": [
         "--disable-extensions",
         "--extensionDevelopmentPath=${workspaceFolder}",
-        "${workspaceFolder}/fixtures"
+        "${workspaceFolder}/contracts"
       ],
       "outFiles": ["${workspaceFolder}/dist/node/**/*.js"],
       "autoAttachChildProcesses": true,

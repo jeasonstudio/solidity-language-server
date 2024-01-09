@@ -3,7 +3,6 @@ import { TextDocumentSyncKind, Connection } from 'vscode-languageserver';
 import { Context } from '../context';
 
 const debug = createDebug('core:onInitialize');
-
 type OnInitialize = Parameters<Connection['onInitialize']>[0];
 
 export const onInitialize =
@@ -13,7 +12,7 @@ export const onInitialize =
 
     const result: ReturnType<OnInitialize> = {
       serverInfo: {
-        name: 'Solidity Language Server',
+        name: 'Solidity',
       },
       capabilities: {
         textDocumentSync: {
@@ -31,7 +30,7 @@ export const onInitialize =
         //   triggerCharacters: ['('],
         // },
         // definitionProvider: true,
-        // hoverProvider: true,
+        hoverProvider: true,
         // codeLensProvider: {
         //   resolveProvider: false,
         //   workDoneProgress: false,
@@ -44,8 +43,6 @@ export const onInitialize =
         // codeActionProvider: true,
       },
     };
-
-    console.log(`initializing result:`, result);
 
     debug(`initializing result:`, result);
     return result;

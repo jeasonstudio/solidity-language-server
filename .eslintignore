@@ -3,3 +3,4 @@
 *.mjs
 *.md
 dist/*
+node_modules/*
