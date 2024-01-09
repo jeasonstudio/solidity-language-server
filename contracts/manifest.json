@@ -1,0 +1,1476 @@
+{
+  "name": ".",
+  "path": ".",
+  "entries": [
+    {
+      "name": "abi-decode",
+      "path": "abi-decode",
+      "entries": [
+        {
+          "name": "AbiDecode.sol",
+          "path": "abi-decode/AbiDecode.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "abi-decode/index.md"
+        }
+      ]
+    },
+    {
+      "name": "abi-encode",
+      "path": "abi-encode",
+      "entries": [
+        {
+          "name": "AbiEncode.sol",
+          "path": "abi-encode/AbiEncode.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "abi-encode/index.md"
+        }
+      ]
+    },
+    {
+      "name": "array",
+      "path": "array",
+      "entries": [
+        {
+          "name": "Array.sol",
+          "path": "array/Array.sol"
+        },
+        {
+          "name": "ArrayRemoveByShifting.sol",
+          "path": "array/ArrayRemoveByShifting.sol"
+        },
+        {
+          "name": "ArrayReplaceFromEnd.sol",
+          "path": "array/ArrayReplaceFromEnd.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "array/index.md"
+        }
+      ]
+    },
+    {
+      "name": "bitwise",
+      "path": "bitwise",
+      "entries": [
+        {
+          "name": "Bitwise.sol",
+          "path": "bitwise/Bitwise.sol"
+        },
+        {
+          "name": "MostSignificantBitAssembly.sol",
+          "path": "bitwise/MostSignificantBitAssembly.sol"
+        },
+        {
+          "name": "MostSignificantBitFunction.sol",
+          "path": "bitwise/MostSignificantBitFunction.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "bitwise/index.md"
+        }
+      ]
+    },
+    {
+      "name": "call",
+      "path": "call",
+      "entries": [
+        {
+          "name": "Call.sol",
+          "path": "call/Call.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "call/index.md"
+        }
+      ]
+    },
+    {
+      "name": "calling-contract",
+      "path": "calling-contract",
+      "entries": [
+        {
+          "name": "CallingContract.sol",
+          "path": "calling-contract/CallingContract.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "calling-contract/index.md"
+        }
+      ]
+    },
+    {
+      "name": "constants",
+      "path": "constants",
+      "entries": [
+        {
+          "name": "Constants.sol",
+          "path": "constants/Constants.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "constants/index.md"
+        }
+      ]
+    },
+    {
+      "name": "constructor_",
+      "path": "constructor_",
+      "entries": [
+        {
+          "name": "Constructor_.sol",
+          "path": "constructor_/Constructor_.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "constructor_/index.md"
+        }
+      ]
+    },
+    {
+      "name": "data-locations",
+      "path": "data-locations",
+      "entries": [
+        {
+          "name": "DataLocations.sol",
+          "path": "data-locations/DataLocations.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "data-locations/index.md"
+        }
+      ]
+    },
+    {
+      "name": "delegatecall",
+      "path": "delegatecall",
+      "entries": [
+        {
+          "name": "Delegatecall.sol",
+          "path": "delegatecall/Delegatecall.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "delegatecall/index.md"
+        }
+      ]
+    },
+    {
+      "name": "enum",
+      "path": "enum",
+      "entries": [
+        {
+          "name": "Enum.sol",
+          "path": "enum/Enum.sol"
+        },
+        {
+          "name": "EnumDeclaration.sol",
+          "path": "enum/EnumDeclaration.sol"
+        },
+        {
+          "name": "EnumImport.sol",
+          "path": "enum/EnumImport.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "enum/index.md"
+        }
+      ]
+    },
+    {
+      "name": "error",
+      "path": "error",
+      "entries": [
+        {
+          "name": "Account.sol",
+          "path": "error/Account.sol"
+        },
+        {
+          "name": "Error.sol",
+          "path": "error/Error.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "error/index.md"
+        }
+      ]
+    },
+    {
+      "name": "ether-units",
+      "path": "ether-units",
+      "entries": [
+        {
+          "name": "EtherUnits.sol",
+          "path": "ether-units/EtherUnits.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "ether-units/index.md"
+        }
+      ]
+    },
+    {
+      "name": "events",
+      "path": "events",
+      "entries": [
+        {
+          "name": "Events.sol",
+          "path": "events/Events.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "events/index.md"
+        }
+      ]
+    },
+    {
+      "name": "fallback",
+      "path": "fallback",
+      "entries": [
+        {
+          "name": "Fallback.sol",
+          "path": "fallback/Fallback.sol"
+        },
+        {
+          "name": "FallbackInputOutput.sol",
+          "path": "fallback/FallbackInputOutput.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "fallback/index.md"
+        }
+      ]
+    },
+    {
+      "name": "first-app",
+      "path": "first-app",
+      "entries": [
+        {
+          "name": "Counter.sol",
+          "path": "first-app/Counter.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "first-app/index.md"
+        }
+      ]
+    },
+    {
+      "name": "function",
+      "path": "function",
+      "entries": [
+        {
+          "name": "Function.sol",
+          "path": "function/Function.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "function/index.md"
+        }
+      ]
+    },
+    {
+      "name": "function-modifier",
+      "path": "function-modifier",
+      "entries": [
+        {
+          "name": "FunctionModifier.sol",
+          "path": "function-modifier/FunctionModifier.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "function-modifier/index.md"
+        }
+      ]
+    },
+    {
+      "name": "function-selector",
+      "path": "function-selector",
+      "entries": [
+        {
+          "name": "FunctionSelector.sol",
+          "path": "function-selector/FunctionSelector.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "function-selector/index.md"
+        }
+      ]
+    },
+    {
+      "name": "gas",
+      "path": "gas",
+      "entries": [
+        {
+          "name": "Gas.sol",
+          "path": "gas/Gas.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "gas/index.md"
+        }
+      ]
+    },
+    {
+      "name": "gas-golf",
+      "path": "gas-golf",
+      "entries": [
+        {
+          "name": "GasGolf.sol",
+          "path": "gas-golf/GasGolf.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "gas-golf/index.md"
+        }
+      ]
+    },
+    {
+      "name": "hashing",
+      "path": "hashing",
+      "entries": [
+        {
+          "name": "Keccak256.sol",
+          "path": "hashing/Keccak256.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "hashing/index.md"
+        }
+      ]
+    },
+    {
+      "name": "hello-world",
+      "path": "hello-world",
+      "entries": [
+        {
+          "name": "HelloWorld.sol",
+          "path": "hello-world/HelloWorld.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "hello-world/index.md"
+        }
+      ]
+    },
+    {
+      "name": "if-else",
+      "path": "if-else",
+      "entries": [
+        {
+          "name": "IfElse.sol",
+          "path": "if-else/IfElse.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "if-else/index.md"
+        }
+      ]
+    },
+    {
+      "name": "immutable",
+      "path": "immutable",
+      "entries": [
+        {
+          "name": "Immutable.sol",
+          "path": "immutable/Immutable.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "immutable/index.md"
+        }
+      ]
+    },
+    {
+      "name": "import",
+      "path": "import",
+      "entries": [
+        {
+          "name": "Foo.sol",
+          "path": "import/Foo.sol"
+        },
+        {
+          "name": "Import.sol",
+          "path": "import/Import.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "import/index.md"
+        }
+      ]
+    },
+    {
+      "name": "inheritance",
+      "path": "inheritance",
+      "entries": [
+        {
+          "name": "Inheritance.sol",
+          "path": "inheritance/Inheritance.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "inheritance/index.md"
+        }
+      ]
+    },
+    {
+      "name": "interface",
+      "path": "interface",
+      "entries": [
+        {
+          "name": "Interface.sol",
+          "path": "interface/Interface.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "interface/index.md"
+        }
+      ]
+    },
+    {
+      "name": "library",
+      "path": "library",
+      "entries": [
+        {
+          "name": "Library.sol",
+          "path": "library/Library.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "library/index.md"
+        }
+      ]
+    },
+    {
+      "name": "loop",
+      "path": "loop",
+      "entries": [
+        {
+          "name": "Loop.sol",
+          "path": "loop/Loop.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "loop/index.md"
+        }
+      ]
+    },
+    {
+      "name": "mapping",
+      "path": "mapping",
+      "entries": [
+        {
+          "name": "Mapping.sol",
+          "path": "mapping/Mapping.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "mapping/index.md"
+        }
+      ]
+    },
+    {
+      "name": "new-contract",
+      "path": "new-contract",
+      "entries": [
+        {
+          "name": "NewContract.sol",
+          "path": "new-contract/NewContract.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "new-contract/index.md"
+        }
+      ]
+    },
+    {
+      "name": "payable",
+      "path": "payable",
+      "entries": [
+        {
+          "name": "Payable.sol",
+          "path": "payable/Payable.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "payable/index.md"
+        }
+      ]
+    },
+    {
+      "name": "primitives",
+      "path": "primitives",
+      "entries": [
+        {
+          "name": "Primitives.sol",
+          "path": "primitives/Primitives.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "primitives/index.md"
+        }
+      ]
+    },
+    {
+      "name": "sending-ether",
+      "path": "sending-ether",
+      "entries": [
+        {
+          "name": "SendingEther.sol",
+          "path": "sending-ether/SendingEther.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "sending-ether/index.md"
+        }
+      ]
+    },
+    {
+      "name": "shadowing-inherited-state-variables",
+      "path": "shadowing-inherited-state-variables",
+      "entries": [
+        {
+          "name": "Shadow.sol",
+          "path": "shadowing-inherited-state-variables/Shadow.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "shadowing-inherited-state-variables/index.md"
+        }
+      ]
+    },
+    {
+      "name": "signature",
+      "path": "signature",
+      "entries": [
+        {
+          "name": "Signature.sol",
+          "path": "signature/Signature.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "signature/index.md"
+        }
+      ]
+    },
+    {
+      "name": "state-variables",
+      "path": "state-variables",
+      "entries": [
+        {
+          "name": "SimpleStorage.sol",
+          "path": "state-variables/SimpleStorage.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "state-variables/index.md"
+        }
+      ]
+    },
+    {
+      "name": "structs",
+      "path": "structs",
+      "entries": [
+        {
+          "name": "StructDeclaration.sol",
+          "path": "structs/StructDeclaration.sol"
+        },
+        {
+          "name": "StructImport.sol",
+          "path": "structs/StructImport.sol"
+        },
+        {
+          "name": "Structs.sol",
+          "path": "structs/Structs.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "structs/index.md"
+        }
+      ]
+    },
+    {
+      "name": "super",
+      "path": "super",
+      "entries": [
+        {
+          "name": "Super.sol",
+          "path": "super/Super.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "super/index.md"
+        }
+      ]
+    },
+    {
+      "name": "try-catch",
+      "path": "try-catch",
+      "entries": [
+        {
+          "name": "TryCatch.sol",
+          "path": "try-catch/TryCatch.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "try-catch/index.md"
+        }
+      ]
+    },
+    {
+      "name": "unchecked-math",
+      "path": "unchecked-math",
+      "entries": [
+        {
+          "name": "UncheckedMath.sol",
+          "path": "unchecked-math/UncheckedMath.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "unchecked-math/index.md"
+        }
+      ]
+    },
+    {
+      "name": "variables",
+      "path": "variables",
+      "entries": [
+        {
+          "name": "Variables.sol",
+          "path": "variables/Variables.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "variables/index.md"
+        }
+      ]
+    },
+    {
+      "name": "view-and-pure-functions",
+      "path": "view-and-pure-functions",
+      "entries": [
+        {
+          "name": "ViewAndPureFunctions.sol",
+          "path": "view-and-pure-functions/ViewAndPureFunctions.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "view-and-pure-functions/index.md"
+        }
+      ]
+    },
+    {
+      "name": "visibility",
+      "path": "visibility",
+      "entries": [
+        {
+          "name": "Visibility.sol",
+          "path": "visibility/Visibility.sol"
+        },
+        {
+          "name": "index.md",
+          "path": "visibility/index.md"
+        }
+      ]
+    },
+    {
+      "name": "app",
+      "path": "app",
+      "entries": [
+        {
+          "name": "bi-directional-payment-channel",
+          "path": "app/bi-directional-payment-channel",
+          "entries": [
+            {
+              "name": "BiDirectionalPaymentChannel.sol",
+              "path": "app/bi-directional-payment-channel/BiDirectionalPaymentChannel.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/bi-directional-payment-channel/index.md"
+            }
+          ]
+        },
+        {
+          "name": "create2",
+          "path": "app/create2",
+          "entries": [
+            {
+              "name": "Create2.sol",
+              "path": "app/create2/Create2.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/create2/index.md"
+            }
+          ]
+        },
+        {
+          "name": "crowd-fund",
+          "path": "app/crowd-fund",
+          "entries": [
+            {
+              "name": "CrowdFund.sol",
+              "path": "app/crowd-fund/CrowdFund.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/crowd-fund/index.md"
+            }
+          ]
+        },
+        {
+          "name": "deploy-any-contract",
+          "path": "app/deploy-any-contract",
+          "entries": [
+            {
+              "name": "Proxy.sol",
+              "path": "app/deploy-any-contract/Proxy.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/deploy-any-contract/index.md"
+            }
+          ]
+        },
+        {
+          "name": "dutch-auction",
+          "path": "app/dutch-auction",
+          "entries": [
+            {
+              "name": "DutchAuction.sol",
+              "path": "app/dutch-auction/DutchAuction.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/dutch-auction/index.md"
+            }
+          ]
+        },
+        {
+          "name": "english-auction",
+          "path": "app/english-auction",
+          "entries": [
+            {
+              "name": "EnglishAuction.sol",
+              "path": "app/english-auction/EnglishAuction.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/english-auction/index.md"
+            }
+          ]
+        },
+        {
+          "name": "erc20",
+          "path": "app/erc20",
+          "entries": [
+            {
+              "name": "ERC20.sol",
+              "path": "app/erc20/ERC20.sol"
+            },
+            {
+              "name": "IERC20.sol",
+              "path": "app/erc20/IERC20.sol"
+            },
+            {
+              "name": "MyToken.sol",
+              "path": "app/erc20/MyToken.sol"
+            },
+            {
+              "name": "TokenSwap.sol",
+              "path": "app/erc20/TokenSwap.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/erc20/index.md"
+            }
+          ]
+        },
+        {
+          "name": "erc721",
+          "path": "app/erc721",
+          "entries": [
+            {
+              "name": "ERC721.sol",
+              "path": "app/erc721/ERC721.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/erc721/index.md"
+            }
+          ]
+        },
+        {
+          "name": "ether-wallet",
+          "path": "app/ether-wallet",
+          "entries": [
+            {
+              "name": "EtherWallet.sol",
+              "path": "app/ether-wallet/EtherWallet.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/ether-wallet/index.md"
+            }
+          ]
+        },
+        {
+          "name": "iterable-mapping",
+          "path": "app/iterable-mapping",
+          "entries": [
+            {
+              "name": "IterableMapping.sol",
+              "path": "app/iterable-mapping/IterableMapping.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/iterable-mapping/index.md"
+            }
+          ]
+        },
+        {
+          "name": "merkle-tree",
+          "path": "app/merkle-tree",
+          "entries": [
+            {
+              "name": "MerkleTree.sol",
+              "path": "app/merkle-tree/MerkleTree.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/merkle-tree/index.md"
+            }
+          ]
+        },
+        {
+          "name": "minimal-proxy",
+          "path": "app/minimal-proxy",
+          "entries": [
+            {
+              "name": "MinimalProxy.sol",
+              "path": "app/minimal-proxy/MinimalProxy.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/minimal-proxy/index.md"
+            }
+          ]
+        },
+        {
+          "name": "multi-call",
+          "path": "app/multi-call",
+          "entries": [
+            {
+              "name": "MultiCall.sol",
+              "path": "app/multi-call/MultiCall.sol"
+            },
+            {
+              "name": "TestMultiCall.sol",
+              "path": "app/multi-call/TestMultiCall.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/multi-call/index.md"
+            }
+          ]
+        },
+        {
+          "name": "multi-delegatecall",
+          "path": "app/multi-delegatecall",
+          "entries": [
+            {
+              "name": "MultiDelegatecall.sol",
+              "path": "app/multi-delegatecall/MultiDelegatecall.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/multi-delegatecall/index.md"
+            }
+          ]
+        },
+        {
+          "name": "multi-sig-wallet",
+          "path": "app/multi-sig-wallet",
+          "entries": [
+            {
+              "name": "MultiSigWallet.sol",
+              "path": "app/multi-sig-wallet/MultiSigWallet.sol"
+            },
+            {
+              "name": "TestContract.sol",
+              "path": "app/multi-sig-wallet/TestContract.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/multi-sig-wallet/index.md"
+            }
+          ]
+        },
+        {
+          "name": "simple-bytecode-contract",
+          "path": "app/simple-bytecode-contract",
+          "entries": [
+            {
+              "name": "Factory.sol",
+              "path": "app/simple-bytecode-contract/Factory.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/simple-bytecode-contract/index.md"
+            }
+          ]
+        },
+        {
+          "name": "time-lock",
+          "path": "app/time-lock",
+          "entries": [
+            {
+              "name": "TimeLock.sol",
+              "path": "app/time-lock/TimeLock.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/time-lock/index.md"
+            }
+          ]
+        },
+        {
+          "name": "uni-directional-payment-channel",
+          "path": "app/uni-directional-payment-channel",
+          "entries": [
+            {
+              "name": "UniDirectionalPaymentChannel.sol",
+              "path": "app/uni-directional-payment-channel/UniDirectionalPaymentChannel.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/uni-directional-payment-channel/index.md"
+            }
+          ]
+        },
+        {
+          "name": "upgradeable-proxy",
+          "path": "app/upgradeable-proxy",
+          "entries": [
+            {
+              "name": "UpgradeableProxy.sol",
+              "path": "app/upgradeable-proxy/UpgradeableProxy.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/upgradeable-proxy/index.md"
+            }
+          ]
+        },
+        {
+          "name": "write-to-any-slot",
+          "path": "app/write-to-any-slot",
+          "entries": [
+            {
+              "name": "Slot.sol",
+              "path": "app/write-to-any-slot/Slot.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "app/write-to-any-slot/index.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "defi",
+      "path": "defi",
+      "entries": [
+        {
+          "name": "chainlink-price-oracle",
+          "path": "defi/chainlink-price-oracle",
+          "entries": [
+            {
+              "name": "Chainlink.sol",
+              "path": "defi/chainlink-price-oracle/Chainlink.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/chainlink-price-oracle/index.md"
+            }
+          ]
+        },
+        {
+          "name": "constant-product-amm",
+          "path": "defi/constant-product-amm",
+          "entries": [
+            {
+              "name": "CPAMM.sol",
+              "path": "defi/constant-product-amm/CPAMM.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/constant-product-amm/index.md"
+            }
+          ]
+        },
+        {
+          "name": "constant-sum-amm",
+          "path": "defi/constant-sum-amm",
+          "entries": [
+            {
+              "name": "CSAMM.sol",
+              "path": "defi/constant-sum-amm/CSAMM.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/constant-sum-amm/index.md"
+            }
+          ]
+        },
+        {
+          "name": "discrete-staking-rewards",
+          "path": "defi/discrete-staking-rewards",
+          "entries": [
+            {
+              "name": "DiscreteStakingRewards.sol",
+              "path": "defi/discrete-staking-rewards/DiscreteStakingRewards.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/discrete-staking-rewards/index.md"
+            }
+          ]
+        },
+        {
+          "name": "stable-swap-amm",
+          "path": "defi/stable-swap-amm",
+          "entries": [
+            {
+              "name": "StableSwap.sol",
+              "path": "defi/stable-swap-amm/StableSwap.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/stable-swap-amm/index.md"
+            }
+          ]
+        },
+        {
+          "name": "staking-rewards",
+          "path": "defi/staking-rewards",
+          "entries": [
+            {
+              "name": "StakingRewards.sol",
+              "path": "defi/staking-rewards/StakingRewards.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/staking-rewards/index.md"
+            }
+          ]
+        },
+        {
+          "name": "uniswap-v2",
+          "path": "defi/uniswap-v2",
+          "entries": [
+            {
+              "name": "UniswapV2SwapExamples.sol",
+              "path": "defi/uniswap-v2/UniswapV2SwapExamples.sol"
+            },
+            {
+              "name": "UniswapV2SwapExamplesTest.sol",
+              "path": "defi/uniswap-v2/UniswapV2SwapExamplesTest.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/uniswap-v2/index.md"
+            }
+          ]
+        },
+        {
+          "name": "uniswap-v2-add-remove-liquidity",
+          "path": "defi/uniswap-v2-add-remove-liquidity",
+          "entries": [
+            {
+              "name": "Liquidity.sol",
+              "path": "defi/uniswap-v2-add-remove-liquidity/Liquidity.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/uniswap-v2-add-remove-liquidity/index.md"
+            }
+          ]
+        },
+        {
+          "name": "uniswap-v2-flash-swap",
+          "path": "defi/uniswap-v2-flash-swap",
+          "entries": [
+            {
+              "name": "UniswapV2FlashSwap.sol",
+              "path": "defi/uniswap-v2-flash-swap/UniswapV2FlashSwap.sol"
+            },
+            {
+              "name": "UniswapV2FlashSwapTest.sol",
+              "path": "defi/uniswap-v2-flash-swap/UniswapV2FlashSwapTest.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/uniswap-v2-flash-swap/index.md"
+            }
+          ]
+        },
+        {
+          "name": "uniswap-v2-optimal-one-sided-supply",
+          "path": "defi/uniswap-v2-optimal-one-sided-supply",
+          "entries": [
+            {
+              "name": "Optimal.sol",
+              "path": "defi/uniswap-v2-optimal-one-sided-supply/Optimal.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/uniswap-v2-optimal-one-sided-supply/index.md"
+            }
+          ]
+        },
+        {
+          "name": "uniswap-v3-flash",
+          "path": "defi/uniswap-v3-flash",
+          "entries": [
+            {
+              "name": "UniswapV3Flash.sol",
+              "path": "defi/uniswap-v3-flash/UniswapV3Flash.sol"
+            },
+            {
+              "name": "UniswapV3FlashTest.sol",
+              "path": "defi/uniswap-v3-flash/UniswapV3FlashTest.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/uniswap-v3-flash/index.md"
+            }
+          ]
+        },
+        {
+          "name": "uniswap-v3-flash-swap",
+          "path": "defi/uniswap-v3-flash-swap",
+          "entries": [
+            {
+              "name": "UniswapV3FlashSwap.sol",
+              "path": "defi/uniswap-v3-flash-swap/UniswapV3FlashSwap.sol"
+            },
+            {
+              "name": "UniswapV3FlashSwapTest.sol",
+              "path": "defi/uniswap-v3-flash-swap/UniswapV3FlashSwapTest.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/uniswap-v3-flash-swap/index.md"
+            }
+          ]
+        },
+        {
+          "name": "uniswap-v3-liquidity",
+          "path": "defi/uniswap-v3-liquidity",
+          "entries": [
+            {
+              "name": "UniswapV3Liquidity.sol",
+              "path": "defi/uniswap-v3-liquidity/UniswapV3Liquidity.sol"
+            },
+            {
+              "name": "UniswapV3LiquidityTest.sol",
+              "path": "defi/uniswap-v3-liquidity/UniswapV3LiquidityTest.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/uniswap-v3-liquidity/index.md"
+            }
+          ]
+        },
+        {
+          "name": "uniswap-v3-swap",
+          "path": "defi/uniswap-v3-swap",
+          "entries": [
+            {
+              "name": "UniswapV3SwapExamples.sol",
+              "path": "defi/uniswap-v3-swap/UniswapV3SwapExamples.sol"
+            },
+            {
+              "name": "UniswapV3SwapExamplesTest.sol",
+              "path": "defi/uniswap-v3-swap/UniswapV3SwapExamplesTest.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/uniswap-v3-swap/index.md"
+            }
+          ]
+        },
+        {
+          "name": "vault",
+          "path": "defi/vault",
+          "entries": [
+            {
+              "name": "Vault.sol",
+              "path": "defi/vault/Vault.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "defi/vault/index.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "hacks",
+      "path": "hacks",
+      "entries": [
+        {
+          "name": "accessing-private-data",
+          "path": "hacks/accessing-private-data",
+          "entries": [
+            {
+              "name": "Vault.sol",
+              "path": "hacks/accessing-private-data/Vault.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/accessing-private-data/index.md"
+            }
+          ]
+        },
+        {
+          "name": "block-timestamp-manipulation",
+          "path": "hacks/block-timestamp-manipulation",
+          "entries": [
+            {
+              "name": "BlockTimestamp.sol",
+              "path": "hacks/block-timestamp-manipulation/BlockTimestamp.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/block-timestamp-manipulation/index.md"
+            }
+          ]
+        },
+        {
+          "name": "contract-size",
+          "path": "hacks/contract-size",
+          "entries": [
+            {
+              "name": "ContractSize.sol",
+              "path": "hacks/contract-size/ContractSize.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/contract-size/index.md"
+            }
+          ]
+        },
+        {
+          "name": "delegatecall",
+          "path": "hacks/delegatecall",
+          "entries": [
+            {
+              "name": "Delegatecall_1.sol",
+              "path": "hacks/delegatecall/Delegatecall_1.sol"
+            },
+            {
+              "name": "Delegatecall_2.sol",
+              "path": "hacks/delegatecall/Delegatecall_2.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/delegatecall/index.md"
+            }
+          ]
+        },
+        {
+          "name": "denial-of-service",
+          "path": "hacks/denial-of-service",
+          "entries": [
+            {
+              "name": "DenialOfService.sol",
+              "path": "hacks/denial-of-service/DenialOfService.sol"
+            },
+            {
+              "name": "PreventDenialOfService.sol",
+              "path": "hacks/denial-of-service/PreventDenialOfService.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/denial-of-service/index.md"
+            }
+          ]
+        },
+        {
+          "name": "front-running",
+          "path": "hacks/front-running",
+          "entries": [
+            {
+              "name": "FrontRunning.sol",
+              "path": "hacks/front-running/FrontRunning.sol"
+            },
+            {
+              "name": "PreventFrontRunning.sol",
+              "path": "hacks/front-running/PreventFrontRunning.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/front-running/index.md"
+            }
+          ]
+        },
+        {
+          "name": "hiding-malicious-code-with-external-contract",
+          "path": "hacks/hiding-malicious-code-with-external-contract",
+          "entries": [
+            {
+              "name": "ExternalContract.sol",
+              "path": "hacks/hiding-malicious-code-with-external-contract/ExternalContract.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/hiding-malicious-code-with-external-contract/index.md"
+            }
+          ]
+        },
+        {
+          "name": "honeypot",
+          "path": "hacks/honeypot",
+          "entries": [
+            {
+              "name": "HoneyPot.sol",
+              "path": "hacks/honeypot/HoneyPot.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/honeypot/index.md"
+            }
+          ]
+        },
+        {
+          "name": "overflow",
+          "path": "hacks/overflow",
+          "entries": [
+            {
+              "name": "Overflow.sol",
+              "path": "hacks/overflow/Overflow.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/overflow/index.md"
+            }
+          ]
+        },
+        {
+          "name": "phishing-with-tx-origin",
+          "path": "hacks/phishing-with-tx-origin",
+          "entries": [
+            {
+              "name": "TxOrigin.sol",
+              "path": "hacks/phishing-with-tx-origin/TxOrigin.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/phishing-with-tx-origin/index.md"
+            }
+          ]
+        },
+        {
+          "name": "randomness",
+          "path": "hacks/randomness",
+          "entries": [
+            {
+              "name": "Randomness.sol",
+              "path": "hacks/randomness/Randomness.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/randomness/index.md"
+            }
+          ]
+        },
+        {
+          "name": "re-entrancy",
+          "path": "hacks/re-entrancy",
+          "entries": [
+            {
+              "name": "ReEntrancy.sol",
+              "path": "hacks/re-entrancy/ReEntrancy.sol"
+            },
+            {
+              "name": "ReEntrancyGuard.sol",
+              "path": "hacks/re-entrancy/ReEntrancyGuard.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/re-entrancy/index.md"
+            }
+          ]
+        },
+        {
+          "name": "self-destruct",
+          "path": "hacks/self-destruct",
+          "entries": [
+            {
+              "name": "ForceEther.sol",
+              "path": "hacks/self-destruct/ForceEther.sol"
+            },
+            {
+              "name": "PreventForceEther.sol",
+              "path": "hacks/self-destruct/PreventForceEther.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/self-destruct/index.md"
+            }
+          ]
+        },
+        {
+          "name": "signature-replay",
+          "path": "hacks/signature-replay",
+          "entries": [
+            {
+              "name": "PreventSigReplay.sol",
+              "path": "hacks/signature-replay/PreventSigReplay.sol"
+            },
+            {
+              "name": "SigReplay.sol",
+              "path": "hacks/signature-replay/SigReplay.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "hacks/signature-replay/index.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tests",
+      "path": "tests",
+      "entries": [
+        {
+          "name": "echidna",
+          "path": "tests/echidna",
+          "entries": [
+            {
+              "name": "EchidnaTestTimeAndCaller.sol",
+              "path": "tests/echidna/EchidnaTestTimeAndCaller.sol"
+            },
+            {
+              "name": "TestEchidna.sol",
+              "path": "tests/echidna/TestEchidna.sol"
+            },
+            {
+              "name": "index.md",
+              "path": "tests/echidna/index.md"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
