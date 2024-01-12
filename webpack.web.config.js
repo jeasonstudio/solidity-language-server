@@ -5,6 +5,7 @@ const baseConfig = createConfig('web');
 /** @type WebpackConfig */
 module.exports = [
   {
+    // entry: extension
     ...baseConfig,
     entry: {
       'web/extension': './src/web/extension.ts',
@@ -15,6 +16,7 @@ module.exports = [
     },
   },
   {
+    // entry: worker
     ...baseConfig,
     entry: {
       'web/server': './src/web/server.ts',

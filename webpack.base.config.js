@@ -16,20 +16,25 @@ const createConfig = (target) => ({
     extensions: ['.ts', '.js', '.tsx', '.jsx', '.mjs'],
     alias: {
       // provides alternate implementation for node module and source files
+      'vscode-languageserver': `vscode-languageserver/${target === 'node' ? 'node' : 'browser'}`,
     },
-    fallback: {
-      // Webpack 5 no longer polyfills Node.js core modules automatically.
-      // see https://webpack.js.org/configuration/resolve/#resolvefallback
-      // for the list of Node.js core module polyfills.
-      path: require.resolve('path-browserify'),
-      buffer: require.resolve('buffer/'),
-      stream: require.resolve('stream-browserify'),
-      url: require.resolve('url/'),
-      util: require.resolve('util/'),
-      assert: require.resolve('assert/'),
-      http: false,
-      https: false,
-    },
+    fallback:
+      target === 'node'
+        ? {}
+        : {
+            // Webpack 5 no longer polyfills Node.js core modules automatically.
+            // see https://webpack.js.org/configuration/resolve/#resolvefallback
+            // for the list of Node.js core module polyfills.
+            path: require.resolve('path-browserify'),
+            buffer: require.resolve('buffer/'),
+            stream: require.resolve('stream-browserify'),
+            url: require.resolve('url/'),
+            util: require.resolve('util/'),
+            assert: require.resolve('assert/'),
+            http: false,
+            https: false,
+            module: false,
+          },
   },
   module: {
     rules: [

@@ -17,6 +17,9 @@ dependencies:
   prettier-plugin-solidity:
     specifier: ^1.3.1
     version: 1.3.1(prettier@3.1.1)
+  require-from-string:
+    specifier: ^2.0.2
+    version: 2.0.2
   solc:
     specifier: 0.8.23-fixed
     version: 0.8.23-fixed(debug@4.3.4)
@@ -5160,7 +5163,6 @@ packages:
   /require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /resolve-cwd@3.0.0:
     resolution: {integrity: sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg==}

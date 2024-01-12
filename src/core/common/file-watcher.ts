@@ -1,6 +1,11 @@
 import * as vscode from 'vscode';
 import { BaseLanguageClient, State } from 'vscode-languageclient';
 import { TextDocumentItem } from 'vscode-languageserver';
+import {
+  EVENT_TEXT_DOCUMENTS_ON_CREATE,
+  EVENT_TEXT_DOCUMENTS_ON_DELETE,
+  EVENT_TEXT_DOCUMENTS_ON_SYNC,
+} from './constants';
 
 const fs = vscode.workspace.fs;
 
@@ -66,7 +71,7 @@ export class SolidityFileWatcher {
           this._documents[td.uri] = td;
         }
         client.sendNotification(
-          'remax.text-documents.on-sync',
+          EVENT_TEXT_DOCUMENTS_ON_SYNC,
           Object.freeze({ documents: this._documents }),
         );
       }
@@ -77,7 +82,7 @@ export class SolidityFileWatcher {
       this._documents[td.uri] = td;
       if (client.state === State.Running) {
         client.sendNotification(
-          'remax.text-documents.on-create',
+          EVENT_TEXT_DOCUMENTS_ON_CREATE,
           Object.freeze({ textDocument: td }),
         );
       }
@@ -86,7 +91,7 @@ export class SolidityFileWatcher {
       delete this._documents[uri.toString(true)];
       if (client.state === State.Running) {
         client.sendNotification(
-          'remax.text-documents.on-delete',
+          EVENT_TEXT_DOCUMENTS_ON_DELETE,
           Object.freeze({ textDocument: { uri: uri.toString(true) } }),
         );
       }

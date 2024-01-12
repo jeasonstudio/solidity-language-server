@@ -1,4 +1,4 @@
-import { CompletionItemKind } from 'vscode-languageserver/browser';
+import { CompletionItemKind } from 'vscode-languageserver';
 import { SyntaxNode } from '../common/parser';
 import { PartialDeep } from 'type-fest';
 

@@ -15,6 +15,7 @@ import {
 } from '../common/parser';
 
 const debug = createDebug('core:text-document');
+const ctx: Context = globalThis.GlobalContext;
 
 export class SolidityTextDocument extends SolidityBaseTextDocument implements TextDocument {
   public static create(
@@ -40,7 +41,6 @@ export class SolidityTextDocument extends SolidityBaseTextDocument implements Te
     }
   }
   public static applyEdits = TextDocument.applyEdits;
-  public ctx: Context = globalThis.GlobalContext;
 
   // File AST parsed by `solidity-antlr4`
   public ast: SourceUnit | null = null;
@@ -162,6 +162,6 @@ export class SolidityTextDocument extends SolidityBaseTextDocument implements Te
    * @todo 支持 `node_modules` 等包管理
    */
   public resolve(...paths: string[]) {
-    return this.ctx.documents.resolve(this.uri, ...paths);
+    return ctx.documents.resolve(this.uri, ...paths);
   }
 }

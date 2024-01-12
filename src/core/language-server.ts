@@ -1,7 +1,6 @@
 import { Connection } from 'vscode-languageserver';
 import { Context } from './context';
-import { SolidityTextDocument } from './text-document';
-import { TextDocuments } from './common/text-documents';
+import { documents } from './common/text-documents';
 import { onExit, onInitialize, onInitialized } from './initialize';
 import { enableDebug } from './common/debug';
 import { onHover, onDefinition } from './definition';
@@ -11,7 +10,6 @@ import { onDocumentFormatting } from './format';
 enableDebug('*');
 
 export const listen = (connection: Connection): Context => {
-  const documents = new TextDocuments(SolidityTextDocument);
   const context = new Context(connection, documents);
   globalThis.GlobalContext = context;
 

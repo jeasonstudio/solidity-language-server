@@ -18,6 +18,7 @@ module.exports = [
     ...baseConfig,
     entry: {
       'node/server': './src/node/server.ts',
+      'node/compiler': './src/node/compiler.ts',
     },
     output: {
       ...baseConfig.output,

@@ -21,6 +21,12 @@ import {
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import * as vscodeUri from 'vscode-uri';
 import { createDebug } from './debug';
+import {
+  EVENT_TEXT_DOCUMENTS_ON_CREATE,
+  EVENT_TEXT_DOCUMENTS_ON_DELETE,
+  EVENT_TEXT_DOCUMENTS_ON_SYNC,
+} from './constants';
+import { SolidityTextDocument } from '../text-document';
 
 const debug = createDebug('core:text-documents');
 
@@ -310,7 +316,7 @@ export class TextDocuments<T extends TextDocument> {
       }),
     );
     disposables.push(
-      connection.onNotification('remax.text-documents.on-sync', (event: SyncTextDocumentParams) => {
+      connection.onNotification(EVENT_TEXT_DOCUMENTS_ON_SYNC, (event: SyncTextDocumentParams) => {
         const documents = event.documents;
         this._syncedDocuments.clear();
         Object.entries(documents).forEach(([, td]) => {
@@ -322,7 +328,7 @@ export class TextDocuments<T extends TextDocument> {
     );
     disposables.push(
       connection.onNotification(
-        'remax.text-documents.on-create',
+        EVENT_TEXT_DOCUMENTS_ON_CREATE,
         (event: DidOpenTextDocumentParams) => {
           const td = event.textDocument;
 
@@ -337,7 +343,7 @@ export class TextDocuments<T extends TextDocument> {
     );
     disposables.push(
       connection.onNotification(
-        'remax.text-documents.on-delete',
+        EVENT_TEXT_DOCUMENTS_ON_DELETE,
         (event: DidCloseTextDocumentParams) => {
           const syncedDocument = this._syncedDocuments.get(event.textDocument.uri);
           if (syncedDocument !== undefined) {
@@ -365,3 +371,5 @@ export class TextDocuments<T extends TextDocument> {
     return null;
   };
 }
+
+export const documents = new TextDocuments(SolidityTextDocument);

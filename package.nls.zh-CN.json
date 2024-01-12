@@ -1,0 +1,9 @@
+{
+  "solidity.format.title": "Solidity Formatter",
+  "solidity.format.bracketSpacing": "在对象字面量的花括号内侧使用空格作为间隔。",
+  "solidity.format.printWidth": "每行代码的长度限制。",
+  "solidity.format.singleQuote": "使用单引号而不是双引号。",
+  "solidity.format.tabWidth": "指定一个制表符等于的空格数。",
+  "solidity.format.useTabs": "使用制表符缩进，而不是空格缩进。",
+  "solidity.compile.title": "Solidity Compiler"
+}

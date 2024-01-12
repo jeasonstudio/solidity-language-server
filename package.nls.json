@@ -1,0 +1,9 @@
+{
+  "solidity.format.title": "Solidity Formatter",
+  "solidity.format.bracketSpacing": "Controls the printing of spaces inside object literals.",
+  "solidity.format.printWidth": "Fit code within this line limit.",
+  "solidity.format.singleQuote": "Use single instead of double quotes.",
+  "solidity.format.tabWidth": "Number of spaces it should use per tab.",
+  "solidity.format.useTabs": "Indent lines with tabs.",
+  "solidity.compile.title": "Solidity Compiler"
+}
