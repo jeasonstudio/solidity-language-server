@@ -3,7 +3,7 @@ import {
   BrowserMessageWriter,
   createConnection,
 } from 'vscode-languageserver/browser';
-import { listen } from '../core/language-server';
+import { listen } from '../core/language-compiler';
 
 const messageReader = new BrowserMessageReader(self);
 const messageWriter = new BrowserMessageWriter(self);

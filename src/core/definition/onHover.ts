@@ -1,13 +1,11 @@
 import { createDebug } from '../common/debug';
-import { Connection, Hover, MarkupContent, MarkupKind } from 'vscode-languageserver/browser';
-import { Context } from '../context';
-import { SyntaxNode, TraverseFilter } from '../common/parser';
+import { Hover, MarkupKind } from 'vscode-languageserver';
+import { Context, OnHover } from '../context';
+import { SyntaxNode } from '../common/parser';
 import { node2string } from '../common/formatter';
 import { globallyList } from '../globally';
 
 const debug = createDebug('core:onHover');
-
-type OnHover = Parameters<Connection['onHover']>[0];
 
 export const onHover =
   (ctx: Context): OnHover =>
@@ -18,6 +16,8 @@ export const onHover =
 
     // 2. 根据 position 获取 target node 和 parent node
     const path = document.getNodeAt(position);
+    if (!path) return null;
+
     const { node: target, parent } = path;
     const range = document.getNodeRange(target);
     debug(
@@ -60,7 +60,7 @@ export const onHover =
       hover = getHover(parent!, [node2string(parent!)]);
     } else if (path.matches({}, { type: 'VariableDeclaration' })) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({}, { type: 'ContractDefinition' })) {
+    } else if (path.matches({ type: 'Identifier' }, { type: 'ContractDefinition' })) {
       hover = getHover(parent!, [node2string(parent!)]);
     } else if (path.matches({}, { type: 'EnumDefinition' })) {
       hover = getHover(parent!, [node2string(parent!)]);

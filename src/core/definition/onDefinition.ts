@@ -1,11 +1,9 @@
 import { createDebug } from '../common/debug';
-import { Connection, Location } from 'vscode-languageserver';
+import { Location } from 'vscode-languageserver';
 import { Path } from '../common/parser';
-import { Context } from '../context';
+import { Context, OnDefinition } from '../context';
 
 const debug = createDebug('core:onDefinition');
-
-type OnDefinition = Parameters<Connection['onDefinition']>[0];
 
 export const onDefinition =
   (ctx: Context): OnDefinition =>

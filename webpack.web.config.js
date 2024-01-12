@@ -18,6 +18,7 @@ module.exports = [
     ...baseConfig,
     entry: {
       'web/server': './src/web/server.ts',
+      'web/compiler': './src/web/compiler.ts',
     },
     output: {
       ...baseConfig.output,

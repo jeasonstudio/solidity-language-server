@@ -1,9 +1,8 @@
 import { createDebug } from '../common/debug';
-import { TextDocumentSyncKind, Connection } from 'vscode-languageserver';
-import { Context } from '../context';
+import { TextDocumentSyncKind } from 'vscode-languageserver';
+import { Context, OnInitialize } from '../context';
 
 const debug = createDebug('core:onInitialize');
-type OnInitialize = Parameters<Connection['onInitialize']>[0];
 
 export const onInitialize =
   (_ctx: Context): OnInitialize =>
@@ -41,6 +40,7 @@ export const onInitialize =
         // implementationProvider: true,
         // renameProvider: true,
         // codeActionProvider: true,
+        documentFormattingProvider: true,
       },
     };
 

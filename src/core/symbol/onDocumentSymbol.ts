@@ -1,5 +1,5 @@
-import { Connection, DocumentSymbol, SymbolKind } from 'vscode-languageserver';
-import { Context } from '../context';
+import { DocumentSymbol, SymbolKind } from 'vscode-languageserver';
+import { Context, OnDocumentSymbol } from '../context';
 import {
   ContractDefinition,
   EnumDefinition,
@@ -13,8 +13,6 @@ import {
   UsingDirective,
   VariableDeclaration,
 } from '../common/parser';
-
-type OnDocumentSymbol = Parameters<Connection['onDocumentSymbol']>[0];
 
 export const onDocumentSymbol =
   (ctx: Context): OnDocumentSymbol =>
