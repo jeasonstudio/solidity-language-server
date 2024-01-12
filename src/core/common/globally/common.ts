@@ -1,5 +1,5 @@
 import { CompletionItemKind } from 'vscode-languageserver';
-import { SyntaxNode } from '../common/parser';
+import { SyntaxNode } from '../parser';
 import { PartialDeep } from 'type-fest';
 
 export interface GloballyVariable {

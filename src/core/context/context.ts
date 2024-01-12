@@ -1,6 +1,6 @@
 import { Connection } from 'vscode-languageserver';
 import { TextDocuments } from '../common/text-documents';
-import { SolidityTextDocument } from '../text-document';
+import { SolidityTextDocument } from '../common/text-document';
 
 export class Context {
   public constructor(

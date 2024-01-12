@@ -1,6 +1,6 @@
 import { Connection, DiagnosticSeverity, Range, TextDocumentSyncKind } from 'vscode-languageserver';
 import { debounce } from 'lodash-es';
-import { SolidityTextDocument } from './text-document';
+import { SolidityTextDocument } from './common/text-document';
 import { TextDocuments, documents } from './common/text-documents';
 import { createDebug, enableDebug } from './common/debug';
 import { importCompiler, validateDocument } from './compiler/compiler';

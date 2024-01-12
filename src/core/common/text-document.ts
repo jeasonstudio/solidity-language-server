@@ -1,7 +1,7 @@
+import * as vscodeUri from 'vscode-uri';
 import { Position, Range, TextDocumentContentChangeEvent } from 'vscode-languageserver';
 import { TextDocument } from 'vscode-languageserver-textdocument';
-import { SolidityBaseTextDocument } from './base';
-import { createDebug } from '../common/debug';
+import { createDebug } from './debug';
 import { Context } from '../context';
 import {
   SyntaxNode,
@@ -12,12 +12,12 @@ import {
   TraversePath,
   traverse,
   SourceUnit,
-} from '../common/parser';
+} from './parser';
 
 const debug = createDebug('core:text-document');
 const ctx: Context = globalThis.GlobalContext;
 
-export class SolidityTextDocument extends SolidityBaseTextDocument implements TextDocument {
+export class SolidityTextDocument implements TextDocument {
   public static create(
     uri: string,
     languageId: string,
@@ -42,12 +42,39 @@ export class SolidityTextDocument extends SolidityBaseTextDocument implements Te
   }
   public static applyEdits = TextDocument.applyEdits;
 
+  public _textDocument!: TextDocument;
+  public get uri(): string {
+    return this._textDocument.uri;
+  }
+  public get languageId(): string {
+    return this._textDocument.languageId;
+  }
+  public get version(): number {
+    return this._textDocument.version;
+  }
+  public get lineCount(): number {
+    return this._textDocument.lineCount;
+  }
+  public get parsedUri(): vscodeUri.URI {
+    return vscodeUri.URI.parse(this.uri);
+  }
+
+  public getText(range?: Range | undefined): string {
+    return this._textDocument.getText(range);
+  }
+  public positionAt(offset: number): Position {
+    return this._textDocument.positionAt(offset);
+  }
+  public offsetAt(position: Position): number {
+    return this._textDocument.offsetAt(position);
+  }
+
   // File AST parsed by `solidity-antlr4`
   public ast: SourceUnit | null = null;
   public tokens: SyntaxToken[] = [];
 
   public constructor(uri: string, languageId: string, version: number, content: string) {
-    super(uri, languageId, version, content);
+    this._textDocument = TextDocument.create(uri, languageId, version, content);
     this.init();
   }
 

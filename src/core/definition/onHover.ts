@@ -3,7 +3,7 @@ import { Hover, MarkupKind } from 'vscode-languageserver';
 import { Context, OnHover } from '../context';
 import { SyntaxNode } from '../common/parser';
 import { node2string } from '../common/formatter';
-import { globallyList } from '../globally';
+import { globallyList } from '../common/globally';
 
 const debug = createDebug('core:onHover');
 
@@ -58,19 +58,19 @@ export const onHover =
       hover = getHover(target, [node2string(target)]);
     } else if (path.matches({ type: 'Path' }, { type: 'ImportDirective' })) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({}, { type: 'VariableDeclaration' })) {
+    } else if (path.matches({ type: 'Identifier' }, { type: 'VariableDeclaration' })) {
       hover = getHover(parent!, [node2string(parent!)]);
     } else if (path.matches({ type: 'Identifier' }, { type: 'ContractDefinition' })) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({}, { type: 'EnumDefinition' })) {
+    } else if (path.matches({ type: 'Identifier' }, { type: 'EnumDefinition' })) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({}, { type: 'UserDefinedValueTypeDefinition' })) {
+    } else if (path.matches({ type: 'Identifier' }, { type: 'UserDefinedValueTypeDefinition' })) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({}, { type: 'ErrorDefinition' })) {
+    } else if (path.matches({ type: 'Identifier' }, { type: 'ErrorDefinition' })) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({}, { type: 'EventDefinition' })) {
+    } else if (path.matches({ type: 'Identifier' }, { type: 'EventDefinition' })) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({}, { type: 'StructDefinition' })) {
+    } else if (path.matches({ type: 'Identifier' }, { type: 'StructDefinition' })) {
       hover = getHover(parent!, [node2string(parent!)]);
     } else if (path.matches({ type: 'Identifier' }, { type: 'FunctionDefinition' })) {
       hover = getHover(parent!, [node2string(parent!)]);
