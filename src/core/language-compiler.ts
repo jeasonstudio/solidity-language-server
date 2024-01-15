@@ -9,14 +9,12 @@ const debug = createDebug('core:compiler');
 enableDebug('*');
 
 export const listen = (connection: Connection): TextDocuments<SolidityTextDocument> => {
+  globalThis.connection = connection;
+  globalThis.documents = documents;
+
   // Lifecycle hooks
   connection.onInitialize(async ({ initializationOptions, workspaceFolders }) => {
     debug('compiler initialize', initializationOptions, workspaceFolders);
-    // if (!initializationOptions?.compilerUrl) {
-    //   connection.window.showWarningMessage(
-    //     "`compilerUrl` not found, please check your extension's configuration.",
-    //   );
-    // }
     await importCompiler(initializationOptions?.compilerUrl);
 
     return {
@@ -31,8 +29,7 @@ export const listen = (connection: Connection): TextDocuments<SolidityTextDocume
     const uri = document.uri;
     const errors = validateDocument(uri);
     const currentErrors = errors.filter(({ sourceLocation }) => sourceLocation?.file === uri);
-    if (!currentErrors.length) return;
-
+    debug('validate', uri, currentErrors);
     connection.sendDiagnostics({
       uri,
       diagnostics: currentErrors.map((error) => {

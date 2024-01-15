@@ -1,21 +1,19 @@
 import * as vscode from 'vscode';
-import type { SolidityFileWatcher } from './file-watcher';
 import type {
   LanguageClientOptions,
   ServerOptions,
   LanguageClient as LanguageClientNode,
 } from 'vscode-languageclient/node';
 import type { LanguageClient as LanguageClientBrowser } from 'vscode-languageclient/browser';
+import { EVENT_TEXT_DOCUMENTS_READ_CONTENT } from './constants';
 
 type LanguageClient = LanguageClientNode | LanguageClientBrowser;
 
-export const createClientOptions = <T extends object>(
-  fileWatcher: SolidityFileWatcher,
-  initializationOptions: T = {} as T,
-) => {
+export const createClientOptions = <T extends object>(initializationOptions: T = {} as T) => {
+  const fileEvent = vscode.workspace.createFileSystemWatcher('**/*.sol');
   const clientOptions: LanguageClientOptions = {
     documentSelector: [{ /*scheme: 'file',*/ language: 'solidity', pattern: `**/*.sol` }],
-    synchronize: { fileEvents: [fileWatcher.fileEvent] },
+    synchronize: { fileEvents: [fileEvent] },
     diagnosticCollectionName: 'solidity',
     initializationOptions,
   };
@@ -30,8 +28,22 @@ export const createServerOptions = (serverMain: string) => {
   return serverOptions;
 };
 
-export const tryStopClient = async (client: LanguageClient | null) => {
-  if (client && client?.state === 2 /*State.Running*/) {
+export const startClient = async (client: LanguageClient) => {
+  // TickTip: server and compiler needs this event to read file content
+  // from worker(especially in browser/webworker)
+  client.onRequest(EVENT_TEXT_DOCUMENTS_READ_CONTENT, async (uri: string) => {
+    const contentBuffer = await vscode.workspace.fs.readFile(vscode.Uri.parse(uri));
+    const content = new TextDecoder().decode(contentBuffer);
+    return content;
+  });
+
+  if (client && client.state !== 2) {
+    await client.start();
+  }
+};
+
+export const stopClient = async (client: LanguageClient | null) => {
+  if (client && client.state === 2 /*State.Running*/) {
     await client.stop();
     // eslint-disable-next-line no-param-reassign
     client = null;

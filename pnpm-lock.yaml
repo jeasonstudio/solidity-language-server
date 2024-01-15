@@ -24,8 +24,8 @@ dependencies:
     specifier: 0.8.23-fixed
     version: 0.8.23-fixed(debug@4.3.4)
   solidity-antlr4:
-    specifier: ^2.4.1
-    version: 2.4.1(antlr4ng-cli@1.0.7)
+    specifier: ^2.4.3
+    version: 2.4.3(antlr4ng-cli@1.0.7)
   type-fest:
     specifier: ^4.9.0
     version: 4.9.0
@@ -5409,11 +5409,12 @@ packages:
       - debug
     dev: false
 
-  /solidity-antlr4@2.4.1(antlr4ng-cli@1.0.7):
-    resolution: {integrity: sha512-gK4Rmuo7atIZHzuCm5Hz4qbmUDDyw8ft8yZmEXCBTv9NcQQpvEPJfO4f+u8JyobbqxE6CjTbfnOZxl7kzDrbDA==}
+  /solidity-antlr4@2.4.3(antlr4ng-cli@1.0.7):
+    resolution: {integrity: sha512-s0w+oFm9ksoX0rlMiXzVssE5UroESEpedy+jUHQfzJXKQMnR1Ebt4RN54NZAxdYUkpFzRqTNho+DN1ZUbQ8OJA==}
     dependencies:
       antlr4ng: 2.0.5(antlr4ng-cli@1.0.7)
       lodash-es: 4.17.21
+      type-fest: 4.9.0
     transitivePeerDependencies:
       - antlr4ng-cli
     dev: false

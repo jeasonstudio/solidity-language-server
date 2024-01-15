@@ -61,18 +61,23 @@ export const resolver = (entryUri: string) => (uri: string) => {
 };
 
 export const compileDocument = (uri: string, settings: CompileInput['settings']): CompileOutput => {
-  if (!documents.get(uri)) {
-    throw new Error(`document ${uri} not found`);
-  }
+  if (!documents.has(uri)) throw new Error(`document ${uri} not found`);
+  const document = documents.get(uri)!;
+  const resolve = (toPath: string) => {
+    const targetPath = document.resolvePath(toPath).toString(true);
+    const contents = documents.get(targetPath)?.getText();
+    if (!contents) return { error: `cannot load file from: ${targetPath}` };
+    return { contents };
+  };
   return compile(
     {
       language: 'Solidity',
       sources: {
-        [uri]: { content: documents.get(uri)!.getText() },
+        [uri]: { content: document.getText() },
       },
       settings,
     },
-    { import: resolver(uri) },
+    { import: resolve },
   );
 };
 

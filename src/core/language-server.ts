@@ -12,6 +12,8 @@ enableDebug('*');
 export const listen = (connection: Connection): Context => {
   const context = new Context(connection, documents);
   globalThis.GlobalContext = context;
+  globalThis.connection = connection;
+  globalThis.documents = documents;
 
   // Lifecycle hooks
   connection.onInitialize(onInitialize(context));

@@ -1,5 +1,5 @@
 import * as vscodeUri from 'vscode-uri';
-import { Position, Range, TextDocumentContentChangeEvent } from 'vscode-languageserver';
+import { Connection, Position, Range, TextDocumentContentChangeEvent } from 'vscode-languageserver';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { createDebug } from './debug';
 import { Context } from '../context';
@@ -12,7 +12,10 @@ import {
   TraversePath,
   traverse,
   SourceUnit,
+  ImportDirective,
 } from './parser';
+import { documents } from './text-documents';
+import { EVENT_TEXT_DOCUMENTS_READ_CONTENT } from './constants';
 
 const debug = createDebug('core:text-document');
 const ctx: Context = globalThis.GlobalContext;
@@ -92,6 +95,15 @@ export class SolidityTextDocument implements TextDocument {
       if (!content) return;
       this.ast = parse<SourceUnit>(content, { tolerant: true });
       this.tokens = tokenizer(content, { tolerant: true });
+
+      const importDirectives = this.ast.nodes.filter(
+        (n) => n.type === 'ImportDirective',
+      ) as ImportDirective[];
+      importDirectives.forEach((n) => {
+        const importPath = this.resolvePath(n.path.name).toString(true);
+        console.log('from:', this.uri, 'to:', importPath);
+        this.resolveDocument(importPath);
+      });
     } catch (error) {
       // ignore
       console.warn(error);
@@ -183,12 +195,57 @@ export class SolidityTextDocument implements TextDocument {
   //   return target;
   // }
 
+  public resolvePath = (target: string): vscodeUri.URI => {
+    let resultUri: vscodeUri.URI;
+    if (target.startsWith('.')) {
+      // `./xxx` or `../xxx` etc. means relative path
+      const dirUri = vscodeUri.Utils.dirname(this.parsedUri);
+      resultUri = vscodeUri.Utils.resolvePath(dirUri, target);
+    } else if (target.startsWith('http:') || target.startsWith('https:')) {
+      // means online path
+      resultUri = vscodeUri.URI.parse(target);
+    } else if (target.startsWith('/')) {
+      // means absolute path
+      throw new Error('absolute path import is not supported yet');
+    } else if (target.startsWith('file:/')) {
+      resultUri = vscodeUri.URI.parse(target);
+    } else {
+      // means from module manager, such as `node_modules`
+      throw new Error(`module manager is not supported yet for: ${target}`);
+    }
+    return resultUri;
+  };
+
+  public resolveDocument = async (target: string) => {
+    const uri = this.resolvePath(target).toString(true);
+    if (documents.has(uri)) return documents.get(uri);
+
+    let content: string;
+    if (uri.startsWith('https://')) {
+      content = await fetch(uri)
+        .then((res) => res.text())
+        .catch((error) => {
+          console.error(error);
+          throw error;
+        });
+    } else if (uri.startsWith('file:///')) {
+      const connection: Connection = globalThis.connection;
+      content = await connection.sendRequest(EVENT_TEXT_DOCUMENTS_READ_CONTENT, uri);
+    } else if (uri.startsWith('http://')) {
+      throw new Error("only support 'https://'");
+    } else {
+      throw new Error(`invalid uri: ${uri}`);
+    }
+    return documents.patchDocument(uri, 'solidity', 1, content);
+  };
+
   /**
    * 从当前文件 resolve 相对路径
    * @param relativePath string 相对当前文件的路径
    * @todo 支持 `node_modules` 等包管理
+   * @deprecated
    */
   public resolve(...paths: string[]) {
-    return ctx.documents.resolve(this.uri, ...paths);
+    return documents.resolve(this.uri, ...paths);
   }
 }

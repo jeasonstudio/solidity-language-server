@@ -361,14 +361,34 @@ export class TextDocuments<T extends TextDocument> {
     });
   }
 
-  public resolve = (from: string, ...to: string[]): T | null => {
+  public resolvePath = (from: string, ...to: string[]): string | null => {
     const fromUri = vscodeUri.URI.parse(from);
     const targetUri = vscodeUri.Utils.resolvePath(vscodeUri.Utils.dirname(fromUri), ...to);
+    return targetUri.toString(true) ?? null;
+  };
 
-    if (this.has(targetUri.toString(true))) {
-      return this.get(targetUri.toString(true)) ?? null;
+  public resolve = (from: string, ...to: string[]): T | null => {
+    const targetUri = this.resolvePath(from, ...to);
+    if (targetUri && this.has(targetUri)) {
+      return this.get(targetUri) ?? null;
     }
     return null;
+  };
+
+  public patchDocument = (
+    uri: string,
+    languageId: string = 'solidity',
+    version: number = 1,
+    content: string = '',
+  ): T => {
+    if (this.has(uri)) return this.get(uri)!;
+    const document = this._configuration.create(uri, languageId, version, content);
+    this._syncedDocuments.set(uri, document);
+    const toFire = Object.freeze({ document });
+    this._onCreate.fire(toFire);
+    this._onDidOpen.fire(toFire);
+    this._onDidChangeContent.fire(toFire);
+    return document;
   };
 }
 
