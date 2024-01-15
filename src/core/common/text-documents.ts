@@ -19,7 +19,6 @@ import {
   TextDocumentItem,
 } from 'vscode-languageserver';
 import { TextDocument } from 'vscode-languageserver-textdocument';
-import * as vscodeUri from 'vscode-uri';
 import { createDebug } from './debug';
 import {
   EVENT_TEXT_DOCUMENTS_ON_CREATE,
@@ -360,20 +359,6 @@ export class TextDocuments<T extends TextDocument> {
       disposables.forEach((disposable) => disposable.dispose());
     });
   }
-
-  public resolvePath = (from: string, ...to: string[]): string | null => {
-    const fromUri = vscodeUri.URI.parse(from);
-    const targetUri = vscodeUri.Utils.resolvePath(vscodeUri.Utils.dirname(fromUri), ...to);
-    return targetUri.toString(true) ?? null;
-  };
-
-  public resolve = (from: string, ...to: string[]): T | null => {
-    const targetUri = this.resolvePath(from, ...to);
-    if (targetUri && this.has(targetUri)) {
-      return this.get(targetUri) ?? null;
-    }
-    return null;
-  };
 
   public patchDocument = (
     uri: string,

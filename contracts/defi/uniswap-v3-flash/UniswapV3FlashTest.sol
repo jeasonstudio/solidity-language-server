@@ -4,7 +4,7 @@ pragma solidity ^0.8.17;
 import "forge-std/Test.sol";
 import "forge-std/console.sol";
 
-import "../src/UniswapV3Flash.sol";
+import "./UniswapV3Flash.sol";
 
 contract UniswapV3FlashTest is Test {
     address constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-import "github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v4.5/contracts/utils/cryptography/ECDSA.sol";
-import "github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v4.5/contracts/security/ReentrancyGuard.sol";
+import "https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/release-v4.5/contracts/utils/cryptography/ECDSA.sol";
+import "https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/release-v4.5/contracts/security/ReentrancyGuard.sol";
 
 contract UniDirectionalPaymentChannel is ReentrancyGuard {
     using ECDSA for bytes32;

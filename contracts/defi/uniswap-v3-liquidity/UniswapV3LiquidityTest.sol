@@ -4,7 +4,7 @@ pragma solidity ^0.8.17;
 import "forge-std/Test.sol";
 import "forge-std/console.sol";
 
-import "../src/UniswapV3Liquidity.sol";
+import "./UniswapV3Liquidity.sol";
 
 contract UniswapV3LiquidityTest is Test {
     IWETH private constant weth = IWETH(WETH);

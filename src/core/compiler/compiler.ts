@@ -46,28 +46,18 @@ export const compile = (input: CompileInput, options?: CompileOption): CompileOu
   }
 };
 
-export const resolver = (entryUri: string) => (uri: string) => {
-  const toUri = vscodeUri.URI.parse(uri);
-
-  if (['https', 'http'].includes(toUri.scheme)) {
-    return { error: 'online dependencies are not safe, please download to workspace' };
-  }
-
-  const document = documents.resolve(entryUri, toUri.path);
-  if (document?.uri) {
-    return { contents: document.getText() };
-  }
-  return { error: 'not found' };
-};
-
 export const compileDocument = (uri: string, settings: CompileInput['settings']): CompileOutput => {
   if (!documents.has(uri)) throw new Error(`document ${uri} not found`);
   const document = documents.get(uri)!;
   const resolve = (toPath: string) => {
-    const targetPath = document.resolvePath(toPath).toString(true);
-    const contents = documents.get(targetPath)?.getText();
-    if (!contents) return { error: `cannot load file from: ${targetPath}` };
-    return { contents };
+    try {
+      const targetPath = document.resolvePath(toPath).toString(true);
+      const contents = documents.get(targetPath)?.getText();
+      if (!contents) throw new Error(`cannot load file from: ${targetPath}`);
+      return { contents };
+    } catch (error) {
+      return { error: (error as any).message };
+    }
   };
   return compile(
     {

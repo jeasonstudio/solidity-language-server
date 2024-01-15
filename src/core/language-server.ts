@@ -9,9 +9,8 @@ import { onDocumentFormatting } from './format';
 
 enableDebug('*');
 
-export const listen = (connection: Connection): Context => {
+export const listen = (connection: Connection) => {
   const context = new Context(connection, documents);
-  globalThis.GlobalContext = context;
   globalThis.connection = connection;
   globalThis.documents = documents;
 
@@ -42,6 +41,4 @@ export const listen = (connection: Connection): Context => {
 
   // Listen on the connection
   connection.listen();
-
-  return context;
 };

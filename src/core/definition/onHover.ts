@@ -20,11 +20,7 @@ export const onHover =
 
     const { node: target, parent } = path;
     const range = document.getNodeRange(target);
-    debug(
-      // `target@L${range.start.line}:${range.start.character}-L${range.end.line}:${range.end.character}`,
-      target,
-      parent,
-    );
+    // debug(target, parent);
 
     // 3. 判断是否为全局变量或方法
     const globallyItem = globallyList.find((item) =>

@@ -2,7 +2,6 @@ import * as vscodeUri from 'vscode-uri';
 import { Connection, Position, Range, TextDocumentContentChangeEvent } from 'vscode-languageserver';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { createDebug } from './debug';
-import { Context } from '../context';
 import {
   SyntaxNode,
   SyntaxToken,
@@ -18,7 +17,6 @@ import { documents } from './text-documents';
 import { EVENT_TEXT_DOCUMENTS_READ_CONTENT } from './constants';
 
 const debug = createDebug('core:text-document');
-const ctx: Context = globalThis.GlobalContext;
 
 export class SolidityTextDocument implements TextDocument {
   public static create(
@@ -72,18 +70,20 @@ export class SolidityTextDocument implements TextDocument {
     return this._textDocument.offsetAt(position);
   }
 
+  public promiseReady: Promise<void>;
+
   // File AST parsed by `solidity-antlr4`
   public ast: SourceUnit | null = null;
   public tokens: SyntaxToken[] = [];
 
   public constructor(uri: string, languageId: string, version: number, content: string) {
     this._textDocument = TextDocument.create(uri, languageId, version, content);
-    this.init();
+    this.promiseReady = this.init();
   }
 
   public update(changes: TextDocumentContentChangeEvent[], version: number): void {
     (this._textDocument as any).update(changes, version); // trick
-    this.init();
+    this.promiseReady = this.init();
   }
 
   /**
@@ -96,17 +96,19 @@ export class SolidityTextDocument implements TextDocument {
       this.ast = parse<SourceUnit>(content, { tolerant: true });
       this.tokens = tokenizer(content, { tolerant: true });
 
+      // resolve imports
       const importDirectives = this.ast.nodes.filter(
         (n) => n.type === 'ImportDirective',
       ) as ImportDirective[];
-      importDirectives.forEach((n) => {
-        const importPath = this.resolvePath(n.path.name).toString(true);
-        console.log('from:', this.uri, 'to:', importPath);
-        this.resolveDocument(importPath);
-      });
+      await Promise.all(
+        importDirectives.map(async (n) => {
+          const importPath = this.resolvePath(n.path.name).toString(true);
+          await this.resolveDocument(importPath);
+        }),
+      );
     } catch (error) {
       // ignore
-      console.warn(error);
+      console.error(error);
     }
   }
 
@@ -238,14 +240,4 @@ export class SolidityTextDocument implements TextDocument {
     }
     return documents.patchDocument(uri, 'solidity', 1, content);
   };
-
-  /**
-   * 从当前文件 resolve 相对路径
-   * @param relativePath string 相对当前文件的路径
-   * @todo 支持 `node_modules` 等包管理
-   * @deprecated
-   */
-  public resolve(...paths: string[]) {
-    return documents.resolve(this.uri, ...paths);
-  }
 }

@@ -1,14 +1,14 @@
 import { Connection, DiagnosticSeverity, Range, TextDocumentSyncKind } from 'vscode-languageserver';
 import { debounce } from 'lodash-es';
 import { SolidityTextDocument } from './common/text-document';
-import { TextDocuments, documents } from './common/text-documents';
+import { documents } from './common/text-documents';
 import { createDebug, enableDebug } from './common/debug';
 import { importCompiler, validateDocument } from './compiler/compiler';
 
 const debug = createDebug('core:compiler');
 enableDebug('*');
 
-export const listen = (connection: Connection): TextDocuments<SolidityTextDocument> => {
+export const listen = (connection: Connection) => {
   globalThis.connection = connection;
   globalThis.documents = documents;
 
@@ -25,7 +25,8 @@ export const listen = (connection: Connection): TextDocuments<SolidityTextDocume
     };
   });
 
-  const validate = (document: SolidityTextDocument) => {
+  const validate = async (document: SolidityTextDocument) => {
+    await document.promiseReady;
     const uri = document.uri;
     const errors = validateDocument(uri);
     const currentErrors = errors.filter(({ sourceLocation }) => sourceLocation?.file === uri);
@@ -75,6 +76,4 @@ export const listen = (connection: Connection): TextDocuments<SolidityTextDocume
   });
   // Listen on the connection
   connection.listen();
-
-  return documents;
 };
