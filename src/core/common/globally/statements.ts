@@ -12,10 +12,12 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'causes a Panic error and thus state change reversion if the condition is not met - to be used for internal errors.',
-    filter: {
-      type: 'Identifier',
-      name: 'assert',
-    },
+    filters: [
+      {
+        type: 'Identifier',
+        name: 'assert',
+      },
+    ],
   },
   require: {
     label: 'require',
@@ -24,10 +26,12 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'reverts if the condition is not met - to be used for errors in inputs or external components.',
-    filter: {
-      type: 'Identifier',
-      name: 'require',
-    },
+    filters: [
+      {
+        type: 'Identifier',
+        name: 'require',
+      },
+    ],
   },
   revert: {
     label: 'revert',
@@ -35,10 +39,12 @@ const completions: GloballyVariableMap = {
     detail: 'revert(string memory reason)',
     url,
     documentation: 'abort execution and revert state changes, providing an explanatory string',
-    filter: {
-      type: 'Identifier',
-      name: 'revert',
-    },
+    filters: [
+      {
+        type: 'Identifier',
+        name: 'revert',
+      },
+    ],
   },
 };
 

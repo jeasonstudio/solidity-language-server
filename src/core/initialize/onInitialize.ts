@@ -30,6 +30,7 @@ export const onInitialize =
         // },
         definitionProvider: true,
         hoverProvider: true,
+        documentLinkProvider: { resolveProvider: false },
         // codeLensProvider: {
         //   resolveProvider: false,
         //   workDoneProgress: false,

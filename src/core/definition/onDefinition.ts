@@ -1,6 +1,6 @@
 import { createDebug } from '../common/debug';
 import { Location } from 'vscode-languageserver';
-import { Path } from '../common/parser';
+import { Path, checkNode } from '../common/parser';
 import { OnDefinition } from '../context';
 
 const debug = createDebug('core:onDefinition');
@@ -15,18 +15,8 @@ export const onDefinition: OnDefinition =
 
     // 2. 根据 position 获取 target node 和 parent node
     const path = document.getNodeAt(position);
-    const { node: target, parent } = path;
-    debug(`onDefinition(${parent?.type}.${target.type})`, target, parent);
-
-    if (path.matches({ type: 'Path' }, { type: 'ImportDirective' })) {
-      const docPath = (<Path>target).name;
-      const targetPath = document.resolvePath(docPath).toString(true);
-      if (!targetPath.startsWith('file:/')) return null;
-      return Location.create(targetPath, {
-        start: document.positionAt(0),
-        end: document.positionAt(0),
-      });
-    }
+    // const nodeList = path.getFlattenParents();
+    debug(`onDefinition:`, path.path, path);
 
     // if (parent?.type === 'ImportDirective' && target.type === 'StringLiteral') {
     //   const targetDocument = ctx.documents.resolve(document.uri, parent.path);

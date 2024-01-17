@@ -1,28 +1,59 @@
 {
-  "name": "solidity-language-server",
-  "publisher": "jeason",
+  "name": "solidity-language-features",
   "version": "1.0.0",
-  "description": "Language server protocol implement for Solidity.",
+  "description": "Language Server Protocol implementation for Solidity.",
   "scripts": {
     "vscodeweb": "vscode-test-web --extensionDevelopmentPath=. --open-devtools --quality=stable ./contracts",
     "prepublishOnly": "pnpm run build",
+    "vscode:prepublish": "pnpm run build",
     "dev": "pnpm run \"/^dev:.+/\"",
-    "dev:web": "webpack --config webpack.web.config.js --watch",
-    "dev:node": "webpack --config webpack.node.config.js --watch",
+    "dev:web": "webpack --config ./scripts/webpack.web.config.js --watch",
+    "dev:node": "webpack --config ./scripts/webpack.node.config.js --watch",
     "build": "pnpm run \"/^build:.+/\"",
-    "build:web": "webpack --config webpack.web.config.js",
-    "build:node": "webpack --config webpack.node.config.js",
+    "build:web": "webpack --config ./scripts/webpack.web.config.js",
+    "build:node": "webpack --config ./scripts/webpack.node.config.js",
+    "build:server": "unbuild",
     "lint": "pnpm run \"/^lint:.+/\"",
     "lint:eslint": "eslint --quiet --fix --ext .ts .",
     "lint:prettier": "prettier **/*.ts --log-level warn --write",
+    "release:vscode": "vsce publish --no-dependencies",
+    "release:npm": "",
     "husky:prepare": "husky install",
     "husky:pre-commit": "lint-staged"
   },
   "author": "Jeason <me@cowpoke.cc>",
   "repository": "git@github.com/jeasonstudio/solidity-language-server.git",
-  "keywords": [],
+  "keywords": [
+    "solidity",
+    "language-server",
+    "lsp",
+    "vscode",
+    "extension"
+  ],
   "license": "MIT",
   "homepage": "https://github.com/jeasonstudio/solidity-language-server#readme",
+  "exports": {
+    ".": {
+      "import": "./dist/server/language-server.js",
+      "types": "./dist/server/language-server.d.ts"
+    },
+    "./server": {
+      "import": "./dist/server/language-server.js",
+      "types": "./dist/server/language-server.d.ts"
+    },
+    "./language-server": {
+      "import": "./dist/server/language-server.js",
+      "types": "./dist/server/language-server.d.ts"
+    },
+    "./compiler": {
+      "import": "./dist/server/language-compiler.js",
+      "types": "./dist/server/language-compiler.d.ts"
+    },
+    "./language-compiler": {
+      "import": "./dist/server/language-compiler.js",
+      "types": "./dist/server/language-compiler.d.ts"
+    }
+  },
   "dependencies": {
     "debug": "^4.3.4",
     "lodash-es": "^4.17.21",
@@ -30,7 +61,7 @@
     "prettier-plugin-solidity": "^1.3.1",
     "require-from-string": "^2.0.2",
     "solc": "0.8.23-fixed",
-    "solidity-antlr4": "^2.4.3",
+    "solidity-antlr4": "^2.5.2",
     "type-fest": "^4.9.0",
     "vscode-languageclient": "^9.0.1",
     "vscode-languageserver": "^9.0.1",
@@ -44,6 +75,7 @@
     "@types/vscode": "^1.85.0",
     "@umijs/fabric": "^4.0.1",
     "@vscode/test-web": "^0.0.50",
+    "@vscode/vsce": "^2.22.0",
     "assert": "^2.1.0",
     "buffer": "^6.0.3",
     "eslint": "^8.56.0",
@@ -54,6 +86,7 @@
     "stream-browserify": "^3.0.0",
     "ts-loader": "^9.5.1",
     "typescript": "~5.1.0",
+    "unbuild": "^2.0.0",
     "url": "^0.11.3",
     "util": "^0.12.5",
     "webpack": "^5.89.0",
@@ -63,15 +96,18 @@
     "registry": "https://registry.npmjs.org",
     "access": "public"
   },
+  "publisher": "Jeason",
+  "displayName": "Solidity Language Features",
   "lint-staged": {
     "*.ts": "eslint --quiet --fix",
     "*.{ts}": "prettier --loglevel warn --write"
   },
   "engines": {
-    "vscode": "^1.36.0"
+    "vscode": "^1.85.0"
   },
   "categories": [
-    "Other"
+    "Programming Languages",
+    "Formatters"
   ],
   "activationEvents": [
     "*"

@@ -1,2 +1,3 @@
-# solidity-language-server
-Language server protocol implement for Solidity.
+# Solidity Language Server
+
+[Language Server Protocol](https://microsoft.github.io/language-server-protocol/) implementation for Solidity.

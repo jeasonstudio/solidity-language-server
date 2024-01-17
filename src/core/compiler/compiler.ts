@@ -1,5 +1,4 @@
 import wrapper from 'solc/wrapper';
-import * as vscodeUri from 'vscode-uri';
 import { CompileError, CompileInput, CompileOption, CompileOutput } from './types';
 import { createDebug } from '../common/debug';
 import { documents } from '../common/text-documents';

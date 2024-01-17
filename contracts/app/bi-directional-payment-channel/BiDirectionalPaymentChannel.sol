@@ -29,6 +29,7 @@ Closing a channel when Alice and Bob do not agree on the final balances
 
 import "https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/release-v4.5/contracts/utils/cryptography/ECDSA.sol";
 
+// test
 contract BiDirectionalPaymentChannel {
     using ECDSA for bytes32;
 
@@ -149,7 +150,10 @@ contract BiDirectionalPaymentChannel {
     }
 
     function withdraw() public onlyUser {
-        require(block.timestamp >= expiresAt, "Challenge period has not expired yet");
+        require(
+            block.timestamp >= expiresAt,
+            "Challenge period has not expired yet"
+        );
 
         uint amount = balances[msg.sender];
         balances[msg.sender] = 0;

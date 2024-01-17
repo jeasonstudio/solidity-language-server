@@ -7,11 +7,12 @@ import {
   SyntaxToken,
   parse,
   tokenizer,
-  TraverseFilter,
   TraversePath,
   traverse,
   SourceUnit,
   ImportDirective,
+  QueryFilter,
+  checkNode,
 } from './parser';
 import { documents } from './text-documents';
 import { EVENT_TEXT_DOCUMENTS_READ_CONTENT } from './constants';
@@ -109,6 +110,16 @@ export class SolidityTextDocument implements TextDocument {
     } catch (error) {
       // ignore
       console.error(error);
+      globalThis.connection?.sendDiagnostics({
+        uri: this.uri,
+        diagnostics: [
+          {
+            message: (error as any).message,
+            severity: 1, // means `error`
+            range: Range.create(this.positionAt(0), this.positionAt(0)),
+          },
+        ],
+      });
     }
   }
 
@@ -143,16 +154,19 @@ export class SolidityTextDocument implements TextDocument {
    * @param position vscode position
    * @returns Path[]
    */
-  public getNodesAt(position: Position, filter?: TraverseFilter, parentFilter?: TraverseFilter) {
+  public getNodesAt(position: Position, filters: QueryFilter[] = []) {
     const offset = this.offsetAt(position);
     const paths: TraversePath[] = [];
-    const enter = (p: TraversePath) => {
-      const [start, end] = p.node.range ?? [0, 0];
+    traverse(this.ast!, (p) => {
+      const [start, end] = p.node.range;
       if (offset >= start && offset <= end) {
-        if (!filter || (filter && p.matches(filter, parentFilter))) paths.push(p);
+        if (filters.length && checkNode(p, filters)) {
+          paths.push(p);
+        } else {
+          paths.push(p);
+        }
       }
-    };
-    traverse(this.ast!, { enter });
+    });
     return paths;
   }
 
@@ -160,11 +174,10 @@ export class SolidityTextDocument implements TextDocument {
    * 从 AST Tree 中找到当前位置最近的 Node
    * @description visitors 不具有优先级，返回最后一个（最深的）
    * @param position vscode position
-   * @param visitors ASTNodeTypeString[]
    * @returns [Node, ParentNode]
    */
-  public getNodeAt(position: Position, filter?: TraverseFilter, parentFilter?: TraverseFilter) {
-    const paths = this.getNodesAt(position, filter, parentFilter);
+  public getNodeAt(position: Position, filters: QueryFilter[] = []) {
+    const paths = this.getNodesAt(position, filters);
     const target = paths[paths.length - 1];
     return target ?? null;
   }

@@ -1,0 +1,8 @@
+.vscode/**
+.vscode-test/**
+.vscode-test-web/**
+contracts/**
+src/**
+.gitignore
+node_modules/**
+

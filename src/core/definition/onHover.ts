@@ -1,7 +1,7 @@
 import { createDebug } from '../common/debug';
 import { Hover, MarkupKind } from 'vscode-languageserver';
 import { Context, OnHover } from '../context';
-import { SyntaxNode } from '../common/parser';
+import { SyntaxNode, checkNode } from '../common/parser';
 import { node2string } from '../common/formatter';
 import { globallyList } from '../common/globally';
 
@@ -18,13 +18,13 @@ export const onHover =
     const path = document.getNodeAt(position);
     if (!path) return null;
 
-    const { node: target, parent } = path;
-    const range = document.getNodeRange(target);
+    // const { node: target, parent } = path;
+    const range = document.getNodeRange(path.node);
     // debug(target, parent);
 
     // 3. 判断是否为全局变量或方法
     const globallyItem = globallyList.find((item) =>
-      item.filter ? path.matches(item.filter, item.parentFilter) : false,
+      !item.filters || !item.filters?.length ? false : checkNode(path, item.filters),
     );
 
     if (globallyItem) {
@@ -49,26 +49,28 @@ export const onHover =
     });
 
     let hover: Hover | null = null;
+    const target = path.node;
+    const parent = path.parentPath?.node;
 
-    if (path.matches({ type: 'ImportDirective' })) {
-      hover = getHover(target, [node2string(target)]);
-    } else if (path.matches({ type: 'Path' }, { type: 'ImportDirective' })) {
+    if (checkNode(path, ['ImportDirective', 'Path'])) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({ type: 'Identifier' }, { type: 'VariableDeclaration' })) {
+    } else if (checkNode(path, ['VariableDeclaration', 'Identifier'])) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({ type: 'Identifier' }, { type: 'ContractDefinition' })) {
+    } else if (checkNode(path, ['ContractDefinition', 'Identifier'])) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({ type: 'Identifier' }, { type: 'EnumDefinition' })) {
+    } else if (checkNode(path, ['EnumDefinition', 'Identifier'])) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({ type: 'Identifier' }, { type: 'UserDefinedValueTypeDefinition' })) {
+    } else if (checkNode(path, ['UserDefinedValueTypeDefinition', 'Identifier'])) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({ type: 'Identifier' }, { type: 'ErrorDefinition' })) {
+    } else if (checkNode(path, ['ErrorDefinition', 'Identifier'])) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({ type: 'Identifier' }, { type: 'EventDefinition' })) {
+    } else if (checkNode(path, ['EventDefinition', 'Identifier'])) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({ type: 'Identifier' }, { type: 'StructDefinition' })) {
+    } else if (checkNode(path, ['StructDefinition', 'Identifier'])) {
       hover = getHover(parent!, [node2string(parent!)]);
-    } else if (path.matches({ type: 'Identifier' }, { type: 'FunctionDefinition' })) {
+    } else if (checkNode(path, ['FunctionDefinition', 'Identifier'])) {
+      hover = getHover(parent!, [node2string(parent!)]);
+    } else if (checkNode(path, ['ModifierDefinition', 'Identifier'])) {
       hover = getHover(parent!, [node2string(parent!)]);
     }
 

@@ -11,10 +11,12 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'compute `(x + y) % k` where the addition is performed with arbitrary precision and does not wrap around at `2**256`. Assert that `k != 0` starting from version 0.5.0.',
-    filter: {
-      type: 'Identifier',
-      name: 'addmod',
-    },
+    filters: [
+      {
+        type: 'Identifier',
+        name: 'addmod',
+      },
+    ],
   },
   mulmod: {
     label: 'mulmod',
@@ -23,10 +25,12 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'compute `(x * y) % k` where the multiplication is performed with arbitrary precision and does not wrap around at `2**256`. Assert that `k != 0` starting from version 0.5.0.',
-    filter: {
-      type: 'Identifier',
-      name: 'mulmod',
-    },
+    filters: [
+      {
+        type: 'Identifier',
+        name: 'mulmod',
+      },
+    ],
   },
   keccak256: {
     label: 'keccak256',
@@ -34,10 +38,12 @@ const completions: GloballyVariableMap = {
     detail: 'keccak256(bytes memory) returns (bytes32)',
     url,
     documentation: 'compute the Keccak-256 hash of the input',
-    filter: {
-      type: 'Identifier',
-      name: 'keccak256',
-    },
+    filters: [
+      {
+        type: 'Identifier',
+        name: 'keccak256',
+      },
+    ],
   },
   sha256: {
     label: 'sha256',
@@ -45,10 +51,12 @@ const completions: GloballyVariableMap = {
     detail: 'sha256(bytes memory) returns (bytes32)',
     url,
     documentation: 'compute the SHA-256 hash of the input',
-    filter: {
-      type: 'Identifier',
-      name: 'sha256',
-    },
+    filters: [
+      {
+        type: 'Identifier',
+        name: 'sha256',
+      },
+    ],
   },
   ripemd160: {
     label: 'ripemd160',
@@ -56,10 +64,12 @@ const completions: GloballyVariableMap = {
     detail: 'ripemd160(bytes memory) returns (bytes20)',
     url,
     documentation: 'compute the RIPEMD-160 hash of the input',
-    filter: {
-      type: 'Identifier',
-      name: 'ripemd160',
-    },
+    filters: [
+      {
+        type: 'Identifier',
+        name: 'ripemd160',
+      },
+    ],
   },
   ecrecover: {
     label: 'ecrecover',
@@ -77,10 +87,12 @@ const completions: GloballyVariableMap = {
 For further details, read [example usage](https://ethereum.stackexchange.com/questions/1777/workflow-on-signing-a-string-with-private-key-followed-by-signature-verificatio).
 
 `,
-    filter: {
-      type: 'Identifier',
-      name: 'ecrecover',
-    },
+    filters: [
+      {
+        type: 'Identifier',
+        name: 'ecrecover',
+      },
+    ],
   },
 };
 

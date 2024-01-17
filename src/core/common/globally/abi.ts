@@ -10,7 +10,7 @@ const completions: GloballyVariableMap = {
     detail: 'abi',
     url,
     documentation: 'abi information',
-    filter: { type: 'Identifier', name: 'abi' },
+    filters: [{ type: 'Identifier', name: 'abi' }],
   },
   'abi.decode': {
     label: 'abi.decode',
@@ -19,11 +19,13 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'ABI-decodes the given data, while the types are given in parentheses as second argument. Example: `(uint a, uint[2] memory b, bytes memory c) = abi.decode(data, (uint, uint[2], bytes))`',
-    filter: {
-      type: 'MemberAccess',
-      expression: { type: 'Identifier', name: 'abi' },
-      memberName: 'decode',
-    },
+    filters: [
+      {
+        type: 'MemberAccess',
+        expression: { type: 'Identifier', name: 'abi' },
+        memberName: 'decode',
+      },
+    ],
   },
   'abi.encode': {
     label: 'abi.encode',
@@ -31,11 +33,13 @@ const completions: GloballyVariableMap = {
     detail: 'abi.encode(...) returns (bytes memory)',
     url,
     documentation: 'ABI-encodes the given arguments',
-    filter: {
-      type: 'MemberAccess',
-      expression: { type: 'Identifier', name: 'abi' },
-      memberName: 'encode',
-    },
+    filters: [
+      {
+        type: 'MemberAccess',
+        expression: { type: 'Identifier', name: 'abi' },
+        memberName: 'encode',
+      },
+    ],
   },
   'abi.encodePacked': {
     label: 'abi.encodePacked',
@@ -44,11 +48,13 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'Performs [packed encoding](https://docs.soliditylang.org/en/v0.8.23/abi-spec.html#abi-packed-mode) of the given arguments. Note that packed encoding can be ambiguous!',
-    filter: {
-      type: 'MemberAccess',
-      expression: { type: 'Identifier', name: 'abi' },
-      memberName: 'encodePacked',
-    },
+    filters: [
+      {
+        type: 'MemberAccess',
+        expression: { type: 'Identifier', name: 'abi' },
+        memberName: 'encodePacked',
+      },
+    ],
   },
   'abi.encodeWithSelector': {
     label: 'abi.encodeWithSelector',
@@ -57,11 +63,13 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'ABI-encodes the given arguments starting from the second and prepends the given four-byte selector',
-    filter: {
-      type: 'MemberAccess',
-      expression: { type: 'Identifier', name: 'abi' },
-      memberName: 'encodeWithSelector',
-    },
+    filters: [
+      {
+        type: 'MemberAccess',
+        expression: { type: 'Identifier', name: 'abi' },
+        memberName: 'encodeWithSelector',
+      },
+    ],
   },
   'abi.encodeWithSignature': {
     label: 'abi.encodeWithSignature',
@@ -70,11 +78,13 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'Equivalent to `abi.encodeWithSelector(bytes4(keccak256(bytes(signature))), ...)`',
-    filter: {
-      type: 'MemberAccess',
-      expression: { type: 'Identifier', name: 'abi' },
-      memberName: 'encodeWithSignature',
-    },
+    filters: [
+      {
+        type: 'MemberAccess',
+        expression: { type: 'Identifier', name: 'abi' },
+        memberName: 'encodeWithSignature',
+      },
+    ],
   },
   'abi.encodeCall': {
     label: 'abi.encodeCall',
@@ -83,11 +93,13 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'ABI-encodes a call to `functionPointer` with the arguments found in the tuple. Performs a full type-check, ensuring the types match the function signature. Result equals `abi.encodeWithSelector(functionPointer.selector, (...))`',
-    filter: {
-      type: 'MemberAccess',
-      expression: { type: 'Identifier', name: 'abi' },
-      memberName: 'encodeCall',
-    },
+    filters: [
+      {
+        type: 'MemberAccess',
+        expression: { type: 'Identifier', name: 'abi' },
+        memberName: 'encodeCall',
+      },
+    ],
   },
 };
 

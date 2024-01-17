@@ -1,14 +1,12 @@
 import { CompletionItemKind } from 'vscode-languageserver';
-import { SyntaxNode } from '../parser';
-import { PartialDeep } from 'type-fest';
+import { QueryFilter } from '../parser';
 
 export interface GloballyVariable {
   label: string;
   kind: CompletionItemKind;
   detail: string;
   documentation: string;
-  filter?: PartialDeep<SyntaxNode>; // undefined/false means cannot filtered
-  parentFilter?: PartialDeep<SyntaxNode>; // undefined/false means cannot filtered
+  filters: QueryFilter[] | false; // undefined/false means cannot filtered
   url?: string; // document url or something
 }
 

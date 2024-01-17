@@ -3,7 +3,7 @@ import { Context } from './context';
 import { documents } from './common/text-documents';
 import { onExit, onInitialize, onInitialized } from './initialize';
 import { enableDebug } from './common/debug';
-import { onHover, onDefinition } from './definition';
+import { onHover, onDefinition, onDocumentLinks } from './definition';
 import { onDocumentSymbol } from './symbol';
 import { onDocumentFormatting } from './format';
 
@@ -24,6 +24,7 @@ export const listen = (connection: Connection) => {
   // connection.onSignatureHelp(onSignatureHelp(context));
   connection.onDefinition(onDefinition(context));
   connection.onHover(onHover(context));
+  connection.onDocumentLinks(onDocumentLinks(context));
   // connection.onCodeLens(onCodeLens(context));
   connection.onDocumentSymbol(onDocumentSymbol(context));
   // connection.onTypeDefinition(onTypeDefinition(serverState));
