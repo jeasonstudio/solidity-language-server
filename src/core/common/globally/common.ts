@@ -6,8 +6,9 @@ export interface GloballyVariable {
   kind: CompletionItemKind;
   detail: string;
   documentation: string;
-  filters: QueryFilter[] | false; // undefined/false means cannot filtered
+  filter: QueryFilter | false; // undefined/false means cannot filtered
   url?: string; // document url or something
+  parameters?: string[];
 }
 
 export type GloballyVariables = GloballyVariable[];

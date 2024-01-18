@@ -11,12 +11,11 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'hash of the given block when `blocknumber` is one of the 256 most recent blocks; otherwise returns zero',
-    filters: [
-      {
-        type: 'Identifier',
-        name: 'blockhash',
-      },
-    ],
+    filter: {
+      type: 'Identifier',
+      name: 'blockhash',
+    },
+    parameters: ['uint blockNumber'],
   },
   block: {
     label: 'block',
@@ -24,12 +23,10 @@ const completions: GloballyVariableMap = {
     detail: 'block',
     url,
     documentation: 'block information',
-    filters: [
-      {
-        type: 'Identifier',
-        name: 'block',
-      },
-    ],
+    filter: {
+      type: 'Identifier',
+      name: 'block',
+    },
   },
   'block.basefee': {
     label: 'block.basefee',
@@ -38,13 +35,11 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'current block’s base fee ([EIP-3198](https://eips.ethereum.org/EIPS/eip-3198) and [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559))',
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'block' },
-        memberName: 'basefee',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'block' },
+      memberName: 'basefee',
+    },
   },
   'block.chainid': {
     label: 'block.chainid',
@@ -52,13 +47,11 @@ const completions: GloballyVariableMap = {
     detail: 'block.chainid (uint)',
     url,
     documentation: 'current chain id',
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'block' },
-        memberName: 'chainid',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'block' },
+      memberName: 'chainid',
+    },
   },
   'block.coinbase': {
     label: 'block.coinbase',
@@ -66,13 +59,11 @@ const completions: GloballyVariableMap = {
     detail: 'block.coinbase (address payable)',
     url,
     documentation: 'current block miner’s address',
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'block' },
-        memberName: 'coinbase',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'block' },
+      memberName: 'coinbase',
+    },
   },
   'block.difficulty': {
     label: 'block.difficulty',
@@ -81,13 +72,11 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'current block difficulty (`EVM < Paris`). For other EVM versions it behaves as a deprecated alias for `block.prevrandao` ([EIP-4399](https://eips.ethereum.org/EIPS/eip-4399))',
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'block' },
-        memberName: 'difficulty',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'block' },
+      memberName: 'difficulty',
+    },
   },
   'block.gaslimit': {
     label: 'block.gaslimit',
@@ -95,13 +84,11 @@ const completions: GloballyVariableMap = {
     detail: 'block.gaslimit (uint)',
     url,
     documentation: 'current block gaslimit',
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'block' },
-        memberName: 'gaslimit',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'block' },
+      memberName: 'gaslimit',
+    },
   },
   'block.number': {
     label: 'block.number',
@@ -109,13 +96,11 @@ const completions: GloballyVariableMap = {
     detail: 'block.number (uint)',
     url,
     documentation: 'current block number',
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'block' },
-        memberName: 'number',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'block' },
+      memberName: 'number',
+    },
   },
   'block.prevrandao': {
     label: 'block.prevrandao',
@@ -123,13 +108,11 @@ const completions: GloballyVariableMap = {
     detail: 'block.prevrandao (uint)',
     url,
     documentation: 'random number provided by the beacon chain (`EVM >= Paris`)',
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'block' },
-        memberName: 'prevrandao',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'block' },
+      memberName: 'prevrandao',
+    },
   },
   'block.timestamp': {
     label: 'block.timestamp',
@@ -137,13 +120,11 @@ const completions: GloballyVariableMap = {
     detail: 'block.timestamp (uint)',
     url,
     documentation: 'current block timestamp as seconds since unix epoch',
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'block' },
-        memberName: 'timestamp',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'block' },
+      memberName: 'timestamp',
+    },
   },
   gasleft: {
     label: 'gasleft',
@@ -151,12 +132,10 @@ const completions: GloballyVariableMap = {
     detail: 'gasleft() returns (uint256)',
     url,
     documentation: 'remaining gas',
-    filters: [
-      {
-        type: 'Identifier',
-        name: 'gasleft',
-      },
-    ],
+    filter: {
+      type: 'Identifier',
+      name: 'gasleft',
+    },
   },
   msg: {
     label: 'msg',
@@ -164,7 +143,7 @@ const completions: GloballyVariableMap = {
     detail: 'msg',
     documentation: 'message information',
     url,
-    filters: [{ type: 'Identifier', name: 'msg' }],
+    filter: { type: 'Identifier', name: 'msg' },
   },
   'msg.data': {
     label: 'msg.data',
@@ -172,13 +151,11 @@ const completions: GloballyVariableMap = {
     detail: 'msg.data (bytes calldata)',
     documentation: 'complete calldata',
     url,
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'msg' },
-        memberName: 'data',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'msg' },
+      memberName: 'data',
+    },
   },
   'msg.sender': {
     label: 'msg.sender',
@@ -186,13 +163,11 @@ const completions: GloballyVariableMap = {
     detail: 'msg.sender (address)',
     documentation: 'sender of the message (current call)',
     url,
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'msg' },
-        memberName: 'sender',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'msg' },
+      memberName: 'sender',
+    },
   },
   'msg.sig': {
     label: 'msg.sig',
@@ -200,13 +175,11 @@ const completions: GloballyVariableMap = {
     detail: 'msg.sig (bytes4)',
     documentation: 'first four bytes of the calldata (i.e. function identifier)',
     url,
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'msg' },
-        memberName: 'sig',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'msg' },
+      memberName: 'sig',
+    },
   },
   'msg.value': {
     label: 'msg.value',
@@ -214,13 +187,11 @@ const completions: GloballyVariableMap = {
     detail: 'msg.value (uint)',
     documentation: 'number of wei sent with the message (1 Ether = 10^18 wei)',
     url,
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'msg' },
-        memberName: 'value',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'msg' },
+      memberName: 'value',
+    },
   },
 
   tx: {
@@ -229,7 +200,7 @@ const completions: GloballyVariableMap = {
     detail: 'tx',
     documentation: 'transaction information',
     url,
-    filters: [{ type: 'Identifier', name: 'tx' }],
+    filter: { type: 'Identifier', name: 'tx' },
   },
   'tx.gasprice': {
     label: 'tx.gasprice',
@@ -237,13 +208,11 @@ const completions: GloballyVariableMap = {
     detail: 'tx.gasprice (uint)',
     documentation: 'gas price of the transaction',
     url,
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'tx' },
-        memberName: 'gasprice',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'tx' },
+      memberName: 'gasprice',
+    },
   },
   'tx.origin': {
     label: 'tx.origin',
@@ -251,13 +220,11 @@ const completions: GloballyVariableMap = {
     detail: 'tx.origin (address)',
     documentation: 'sender of the transaction (full call chain)',
     url,
-    filters: [
-      {
-        type: 'MemberAccess',
-        expression: { type: 'Identifier', name: 'tx' },
-        memberName: 'origin',
-      },
-    ],
+    filter: {
+      type: 'MemberAccess',
+      expression: { type: 'Identifier', name: 'tx' },
+      memberName: 'origin',
+    },
   },
 };
 

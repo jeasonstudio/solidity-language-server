@@ -154,16 +154,17 @@ export class SolidityTextDocument implements TextDocument {
    * @param position vscode position
    * @returns Path[]
    */
-  public getNodesAt(position: Position, filters: QueryFilter[] = []) {
+  public getNodesAt<T extends SyntaxNode = SyntaxNode>(
+    position: Position,
+    filters: QueryFilter[] = [],
+  ) {
     const offset = this.offsetAt(position);
-    const paths: TraversePath[] = [];
+    const paths: TraversePath<T>[] = [];
     traverse(this.ast!, (p) => {
       const [start, end] = p.node.range;
       if (offset >= start && offset <= end) {
-        if (filters.length && checkNode(p, filters)) {
-          paths.push(p);
-        } else {
-          paths.push(p);
+        if (!filters.length || (filters.length && checkNode(p, filters))) {
+          paths.push(p as any);
         }
       }
     });
@@ -176,8 +177,11 @@ export class SolidityTextDocument implements TextDocument {
    * @param position vscode position
    * @returns [Node, ParentNode]
    */
-  public getNodeAt(position: Position, filters: QueryFilter[] = []) {
-    const paths = this.getNodesAt(position, filters);
+  public getNodeAt<T extends SyntaxNode = SyntaxNode>(
+    position: Position,
+    filters: QueryFilter[] = [],
+  ) {
+    const paths = this.getNodesAt<T>(position, filters);
     const target = paths[paths.length - 1];
     return target ?? null;
   }

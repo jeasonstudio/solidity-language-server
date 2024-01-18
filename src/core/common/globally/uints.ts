@@ -10,7 +10,7 @@ const completions: GloballyVariableMap = Object.fromEntries(
       detail: label,
       documentation: label,
       url: 'https://docs.soliditylang.org/en/v0.8.23/units-and-global-variables.html',
-      filters: [{ type: 'NumberLiteral', subDenomination: label }],
+      filter: { type: 'NumberLiteral', subDenomination: label },
     } as GloballyVariable,
   ]),
 );

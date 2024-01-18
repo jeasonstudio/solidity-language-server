@@ -11,12 +11,11 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'compute `(x + y) % k` where the addition is performed with arbitrary precision and does not wrap around at `2**256`. Assert that `k != 0` starting from version 0.5.0.',
-    filters: [
-      {
-        type: 'Identifier',
-        name: 'addmod',
-      },
-    ],
+    filter: {
+      type: 'Identifier',
+      name: 'addmod',
+    },
+    parameters: ['uint x', 'uint y', 'uint k'],
   },
   mulmod: {
     label: 'mulmod',
@@ -25,51 +24,47 @@ const completions: GloballyVariableMap = {
     url,
     documentation:
       'compute `(x * y) % k` where the multiplication is performed with arbitrary precision and does not wrap around at `2**256`. Assert that `k != 0` starting from version 0.5.0.',
-    filters: [
-      {
-        type: 'Identifier',
-        name: 'mulmod',
-      },
-    ],
+    filter: {
+      type: 'Identifier',
+      name: 'mulmod',
+    },
+    parameters: ['uint x', 'uint y', 'uint k'],
   },
   keccak256: {
     label: 'keccak256',
     kind: CompletionItemKind.Function,
-    detail: 'keccak256(bytes memory) returns (bytes32)',
+    detail: 'keccak256(bytes memory data) returns (bytes32)',
     url,
     documentation: 'compute the Keccak-256 hash of the input',
-    filters: [
-      {
-        type: 'Identifier',
-        name: 'keccak256',
-      },
-    ],
+    filter: {
+      type: 'Identifier',
+      name: 'keccak256',
+    },
+    parameters: ['bytes memory data'],
   },
   sha256: {
     label: 'sha256',
     kind: CompletionItemKind.Function,
-    detail: 'sha256(bytes memory) returns (bytes32)',
+    detail: 'sha256(bytes memory data) returns (bytes32)',
     url,
     documentation: 'compute the SHA-256 hash of the input',
-    filters: [
-      {
-        type: 'Identifier',
-        name: 'sha256',
-      },
-    ],
+    filter: {
+      type: 'Identifier',
+      name: 'sha256',
+    },
+    parameters: ['bytes memory data'],
   },
   ripemd160: {
     label: 'ripemd160',
     kind: CompletionItemKind.Function,
-    detail: 'ripemd160(bytes memory) returns (bytes20)',
+    detail: 'ripemd160(bytes memory data) returns (bytes20)',
     url,
     documentation: 'compute the RIPEMD-160 hash of the input',
-    filters: [
-      {
-        type: 'Identifier',
-        name: 'ripemd160',
-      },
-    ],
+    filter: {
+      type: 'Identifier',
+      name: 'ripemd160',
+    },
+    parameters: ['bytes memory data'],
   },
   ecrecover: {
     label: 'ecrecover',
@@ -87,12 +82,11 @@ const completions: GloballyVariableMap = {
 For further details, read [example usage](https://ethereum.stackexchange.com/questions/1777/workflow-on-signing-a-string-with-private-key-followed-by-signature-verificatio).
 
 `,
-    filters: [
-      {
-        type: 'Identifier',
-        name: 'ecrecover',
-      },
-    ],
+    filter: {
+      type: 'Identifier',
+      name: 'ecrecover',
+    },
+    parameters: ['bytes32 hash', 'uint8 v', 'bytes32 r', 'bytes32 s'],
   },
 };
 

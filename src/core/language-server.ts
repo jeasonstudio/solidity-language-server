@@ -6,6 +6,7 @@ import { enableDebug } from './common/debug';
 import { onHover, onDefinition, onDocumentLinks } from './definition';
 import { onDocumentSymbol } from './symbol';
 import { onDocumentFormatting } from './format';
+import { onSignatureHelp } from './completion';
 
 enableDebug('*');
 
@@ -21,7 +22,7 @@ export const listen = (connection: Connection) => {
 
   // Command hooks
   // connection.onCompletion(onCompletion(context));
-  // connection.onSignatureHelp(onSignatureHelp(context));
+  connection.onSignatureHelp(onSignatureHelp(context));
   connection.onDefinition(onDefinition(context));
   connection.onHover(onHover(context));
   connection.onDocumentLinks(onDocumentLinks(context));

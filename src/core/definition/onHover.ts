@@ -24,7 +24,7 @@ export const onHover =
 
     // 3. 判断是否为全局变量或方法
     const globallyItem = globallyList.find((item) =>
-      !item.filters || !item.filters?.length ? false : checkNode(path, item.filters),
+      !item.filter ? false : checkNode(path, [item.filter]),
     );
 
     if (globallyItem) {

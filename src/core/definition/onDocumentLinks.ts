@@ -18,7 +18,7 @@ export const onDocumentLinks: OnDocumentLinks =
           const importPath = document.resolvePath(p.node.path.name).toString(true);
           links.push(DocumentLink.create(document.getNodeRange(p.node.path), importPath));
         } catch (error) {
-          // Ignore error: console.error(error);
+          // Ignore errors: console.error(error);
         }
       },
     });

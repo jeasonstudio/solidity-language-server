@@ -25,9 +25,9 @@ export const onInitialize =
         // completionProvider: {
         //   triggerCharacters: ['.', '"', `'`, '*', ' '],
         // },
-        // signatureHelpProvider: {
-        //   triggerCharacters: ['('],
-        // },
+        signatureHelpProvider: {
+          triggerCharacters: ['(', ','],
+        },
         definitionProvider: true,
         hoverProvider: true,
         documentLinkProvider: { resolveProvider: false },

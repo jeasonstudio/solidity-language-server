@@ -16,13 +16,16 @@ export type QueryFilter = PartialDeep<SyntaxNode> | SyntaxNodeType;
  * @param path traverse path
  * @param filters from parent to child
  */
-export const checkNode = (_path: TraversePath, _filters: QueryFilter[]) => {
+export const checkNode = <T extends SyntaxNode>(
+  _path: TraversePath<T>,
+  _filters: QueryFilter[],
+) => {
   const filters = _filters.map((filter) =>
     typeof filter === 'string' ? { type: filter } : filter,
   ) as PartialDeep<SyntaxNode>[];
 
   if (!filters.length) return true;
-  let path: TraversePath | null = _path;
+  let path: TraversePath | null = _path as any;
 
   for (let index = filters.length - 1; index >= 0; index -= 1) {
     const filter = filters[index];
