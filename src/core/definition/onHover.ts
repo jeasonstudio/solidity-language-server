@@ -1,21 +1,23 @@
 import { createDebug } from '../common/debug';
 import { Hover, MarkupKind } from 'vscode-languageserver';
-import { Context, OnHover } from '../context';
+import { OnHover } from '../context';
 import { Path, SyntaxNode } from '../common/parser';
 import { n2s } from '../common/node';
 import { globallyList } from '../common/globally';
 import { markupGlobally, markupSolidity } from '../common/utils';
+import { findDefinition } from './findDefinition';
 
 const debug = createDebug('server:onHover');
 
-export const onHover =
-  (ctx: Context): OnHover =>
+export const onHover: OnHover =
+  (ctx) =>
   async ({ textDocument, position }) => {
     // 1. 获取 documents
     const document = ctx.documents.get(textDocument.uri);
     if (!document?.ast) return null;
 
     const createSelector = document.createPositionSelector(position);
+
     const path = document.getPathAt(createSelector('*'));
     if (!path) return null;
 
@@ -58,5 +60,8 @@ export const onHover =
       return getHover(path.parentPath!.node, [n2s(path.parentPath!.node)]);
     }
 
-    return null;
+    const definition = findDefinition(textDocument.uri, position)[0] ?? null;
+    if (!definition) return null;
+
+    return getHover(definition.node, [n2s(definition.node)]);
   };

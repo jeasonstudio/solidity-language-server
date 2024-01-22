@@ -1,5 +1,5 @@
 import { DocumentSymbol, SymbolKind } from 'vscode-languageserver';
-import { Context, OnDocumentSymbol } from '../context';
+import { OnDocumentSymbol } from '../context';
 import {
   ContractDefinition,
   EnumDefinition,
@@ -14,8 +14,8 @@ import {
   VariableDeclaration,
 } from '../common/parser';
 
-export const onDocumentSymbol =
-  (ctx: Context): OnDocumentSymbol =>
+export const onDocumentSymbol: OnDocumentSymbol =
+  (ctx) =>
   async ({ textDocument }) => {
     const document = ctx.documents.get(textDocument.uri);
     if (!document || !document.ast) return null;

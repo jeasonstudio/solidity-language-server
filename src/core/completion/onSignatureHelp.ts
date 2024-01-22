@@ -3,7 +3,7 @@ import { createDebug } from '../common/debug';
 import { OnSignatureHelp } from '../context';
 import { globallyList } from '../common/globally';
 import { markup, markupSolidity } from '../common/utils';
-import { CompletionItemKind, SignatureHelp } from 'vscode-languageserver';
+import { CompletionItemKind, SignatureHelp, SignatureHelpTriggerKind } from 'vscode-languageserver';
 import { matches } from 'lodash-es';
 
 const debug = createDebug('server:onSignatureHelp');
@@ -29,18 +29,22 @@ export const onSignatureHelp: OnSignatureHelp =
         activeSignature: 0,
         activeParameter: Math.min(
           parametersLength,
-          signatureCtx.triggerCharacter === ',' ? activeParameter + 1 : activeParameter,
+          signatureCtx.triggerCharacter === ',' &&
+            signatureCtx.triggerKind === SignatureHelpTriggerKind.TriggerCharacter
+            ? activeParameter + 1
+            : activeParameter,
         ),
       };
       return signatureHelp;
     }
 
     const offset = document.offsetAt(position);
-    const path = document.getNodeAt<FunctionCall>(position, ['FunctionCall']);
+    const createSelector = document.createPositionSelector(position);
+    const path = document.getPathAt<FunctionCall>(createSelector('FunctionCall'));
     if (!path) return null;
 
     // get current parameter active index
-    let argumentIndex = 0;
+    let argumentIndex = -1;
     path.node.arguments?.forEach((arg, index) => {
       if (offset >= arg.range[0]) argumentIndex = index;
     });

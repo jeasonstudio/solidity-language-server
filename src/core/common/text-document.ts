@@ -12,7 +12,6 @@ import {
   SourceUnit,
   QueryFilter,
   checkNode,
-  visit,
   Selector,
   ContractDefinition,
   createSelector,
@@ -267,12 +266,16 @@ export class SolidityTextDocument implements TextDocument {
     return (filter: SelectorFilter) => createSelector(filter, offset);
   }
 
-  public getPathsAt<T extends SyntaxNode = SyntaxNode>(selector: Selector): TraversePath<T>[] {
-    return query<T>(this.ast!, selector, { queryAll: true, order: 'asc' });
+  public getPathsAt<T extends SyntaxNode = SyntaxNode>(
+    ...selectors: Selector[]
+  ): TraversePath<T>[] {
+    return query<T>(this.ast!, selectors, { queryAll: true, order: 'asc' });
   }
 
-  public getPathAt<T extends SyntaxNode = SyntaxNode>(selector: Selector): TraversePath<T> | null {
-    return query<T>(this.ast!, selector, { queryAll: true, order: 'desc' })?.[0] ?? null;
+  public getPathAt<T extends SyntaxNode = SyntaxNode>(
+    ...selectors: Selector[]
+  ): TraversePath<T> | null {
+    return query<T>(this.ast!, selectors, { queryAll: true, order: 'desc' })?.[0] ?? null;
   }
 
   public resolvePath = (target: string): vscodeUri.URI => {

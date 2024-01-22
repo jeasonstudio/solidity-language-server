@@ -3,12 +3,12 @@ import { SyntaxNode } from './parser';
 export const n2s = (node?: SyntaxNode | null) => {
   if (!node) return '';
 
-  const toString = <T extends SyntaxNode>(n: T): string => {
-    return `${n.type}`;
-  };
+  const toString = <T extends SyntaxNode>(_n: T): string => '';
+  const toName = (n: any) => n?.name ?? '';
   const join = (...args: any[]) => args.filter((item) => item ?? false).join(' ');
   const joinWithComma = (...args: any[]) => args.filter((item) => item ?? false).join(', ');
-  const joinWithParen = (n: string, ...args: any[]) => `${n} (${joinWithComma(...args)})`;
+  const joinWithParen = (n: string, args: any[] | null) =>
+    args === null ? n : `${n}(${joinWithComma(...args)})`;
 
   switch (node.type) {
     /* declaration */
@@ -22,47 +22,82 @@ export const n2s = (node?: SyntaxNode | null) => {
           : null,
       );
     case 'EnumDefinition':
-      return toString(node);
+      return join('enum', n2s(node.name));
     case 'ErrorDefinition':
-      return toString(node);
+      return join('error', joinWithParen(n2s(node.name), node.parameters.map(n2s)));
     case 'EventDefinition':
-      return toString(node);
+      return join('event', joinWithParen(n2s(node.name), node.parameters.map(n2s)));
     case 'FunctionDefinition':
-      return toString(node);
+      const params = (node.parameters ?? []).map(n2s);
+      const returns = (node.returnParameters ?? []).map(n2s);
+      const items = [
+        n2s(node.visibility),
+        n2s(node.stateMutability),
+        node.virtual ? 'virtual' : null,
+        ...(node.override ?? []).map(n2s),
+        ...node.modifiers.map(n2s),
+        returns.length ? joinWithParen('returns', returns) : null,
+      ];
+
+      switch (node.functionKind) {
+        case 'constructor':
+          return join(joinWithParen('constructor', params), ...items);
+        case 'fallback':
+        case 'receive':
+          return join(`(${node.functionKind})`, joinWithParen('function', params), ...items);
+        case 'function':
+        default:
+          return join(joinWithParen(join('function', n2s(node.name)), params), ...items);
+      }
     case 'ModifierDefinition':
-      return toString(node);
+      return join(
+        'modifier',
+        joinWithParen(n2s(node.name), (node.parameters ?? []).map(n2s)),
+        node.virtual ? 'virtual' : null,
+        ...(node.override ?? []).map(n2s),
+      );
     case 'StateMutability':
-      return toString(node);
+      return toName(node);
     case 'StructDefinition':
-      return toString(node);
+      return join('struct', n2s(node.name));
     case 'StructMember':
-      return toString(node);
+      return join(n2s(node.typeName), n2s(node.name));
     case 'UserDefinedValueTypeDefinition':
-      return toString(node);
+      return join(n2s(node.typeName), node.name);
     case 'VariableDeclaration':
-      return toString(node);
+      return join(
+        n2s(node.typeName),
+        node.public ? 'public' : null,
+        node.private ? 'private' : null,
+        node.internal ? 'internal' : null,
+        node.immutable ? 'immutable' : null,
+        node.constant ? 'constant' : null,
+        node.indexed ? 'indexed' : null,
+        n2s(node.dataLocation),
+        n2s(node.name),
+      );
     case 'Visibility':
-      return toString(node);
+      return toName(node);
 
     /* expression */
     case 'AssignOp':
-      return toString(node);
+      return toName(node);
     case 'Assignment':
-      return toString(node);
+      return join(n2s(node.left), node.operator, n2s(node.right));
     case 'BinaryOperation':
-      return toString(node);
+      return join(n2s(node.left), node.operator, n2s(node.right));
     case 'BooleanLiteral':
-      return toString(node);
+      return node.value ? 'true' : 'false';
     case 'Conditional':
-      return toString(node);
+      return '';
     case 'FunctionCallOptions':
-      return toString(node);
+      return '';
     case 'FunctionCall':
-      return toString(node);
+      return '';
     case 'HexStringLiteral':
-      return toString(node);
+      return `'${node.value}'`;
     case 'Identifier':
-      return node.name;
+      return toName(node);
     case 'IndexAccess':
       return toString(node);
     case 'IndexRangeAccess':
@@ -90,13 +125,13 @@ export const n2s = (node?: SyntaxNode | null) => {
     case 'DataLocation':
       return toString(node);
     case 'IdentifierPath':
-      return node.name;
+      return toName(node);
     case 'ImportAliases':
       return toString(node);
     case 'ImportDirective':
       return toString(node);
     case 'InheritanceSpecifier':
-      return joinWithParen(n2s(node.baseName), ...node.arguments.map(n2s));
+      return joinWithParen(n2s(node.baseName), node.arguments.map(n2s));
     case 'ModifierInvocation':
       return toString(node);
     case 'Path':
@@ -140,17 +175,17 @@ export const n2s = (node?: SyntaxNode | null) => {
 
     /* type */
     case 'ElementaryTypeName':
-      return toString(node);
+      return join(node.name, node.payable ? 'payable' : null);
     case 'FunctionTypeName':
-      return toString(node);
+      return n2s({ ...node, type: 'FunctionDefinition' });
     case 'MappingKeyType':
-      return toString(node);
+      return toName(node);
     case 'MappingType':
-      return toString(node);
+      return `mapping(${n2s(node.keyType)} => ${n2s(node.valueType)})`;
     case 'MetaType':
-      return toString(node);
+      return n2s(node.typeName);
     case 'TypeName':
-      return toString(node);
+      return node.name ?? '';
 
     /* TODO: yul */
     default:
