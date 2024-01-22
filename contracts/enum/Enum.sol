@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-contract Enum {
+abstract contract Enum {
     // Enum representing shipping status
     enum Status {
         Pending,

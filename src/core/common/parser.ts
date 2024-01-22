@@ -1,4 +1,12 @@
-import { visit, SyntaxNode, VisitHandlers, TraversePath, SyntaxNodeType } from 'solidity-antlr4';
+import {
+  visit,
+  SyntaxNode,
+  VisitHandlers,
+  TraversePath,
+  SyntaxNodeType,
+  TypeNode,
+  TypeNodeType,
+} from 'solidity-antlr4';
 import { PartialDeep } from 'type-fest';
 
 export * from 'solidity-antlr4';
@@ -10,6 +18,19 @@ export const visitEnter = (ast: SyntaxNode, enter: VisitHandlers['enter']) => vi
 export const visitExit = (ast: SyntaxNode, exit: VisitHandlers['exit']) => visit(ast, { exit });
 
 export type QueryFilter = PartialDeep<SyntaxNode> | SyntaxNodeType;
+
+export const getNodes = <T extends SyntaxNode = SyntaxNode>(
+  ast: SyntaxNode,
+  callback: (p: TraversePath) => boolean,
+): T[] => {
+  const nodes: T[] = [];
+  visit(ast, {
+    enter(path) {
+      if (callback(path)) nodes.push(path.node as any);
+    },
+  });
+  return nodes;
+};
 
 /**
  * Check if the node matches the filters
@@ -34,4 +55,16 @@ export const checkNode = <T extends SyntaxNode>(
     path = path.parentPath;
   }
   return true;
+};
+
+export const isTypeNode = <T extends TypeNode>(node: any): node is T => {
+  const types: TypeNodeType[] = [
+    'ElementaryTypeName',
+    'FunctionTypeName',
+    'MappingKeyType',
+    'MappingType',
+    'MetaType',
+    'TypeName',
+  ];
+  return types.includes(node.type);
 };

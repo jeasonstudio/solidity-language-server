@@ -10,14 +10,42 @@ import {
   TraversePath,
   traverse,
   SourceUnit,
-  ImportDirective,
   QueryFilter,
   checkNode,
+  visit,
+  Selector,
+  ContractDefinition,
+  createSelector,
+  SelectorFilter,
+  query,
+  EnumDefinition,
+  ErrorDefinition,
+  FunctionDefinition,
+  StructDefinition,
+  UserDefinedValueTypeDefinition,
+  VariableDeclaration,
 } from './parser';
 import { documents } from './text-documents';
 import { EVENT_TEXT_DOCUMENTS_READ_CONTENT } from './constants';
 
 const debug = createDebug('core:text-document');
+
+export interface SolidityExportItem {
+  name: string; // Foo, Foo.Bar, Foo.Bar.baz etc.
+  uri: string;
+  node:
+    | ContractDefinition
+    | EnumDefinition
+    | ErrorDefinition
+    | FunctionDefinition
+    | StructDefinition
+    | UserDefinedValueTypeDefinition
+    | VariableDeclaration;
+}
+
+export interface SolidityImportItem extends SolidityExportItem {
+  sourceName: string;
+}
 
 export class SolidityTextDocument implements TextDocument {
   public static create(
@@ -43,7 +71,6 @@ export class SolidityTextDocument implements TextDocument {
     }
   }
   public static applyEdits = TextDocument.applyEdits;
-
   public _textDocument!: TextDocument;
   public get uri(): string {
     return this._textDocument.uri;
@@ -60,7 +87,6 @@ export class SolidityTextDocument implements TextDocument {
   public get parsedUri(): vscodeUri.URI {
     return vscodeUri.URI.parse(this.uri);
   }
-
   public getText(range?: Range | undefined): string {
     return this._textDocument.getText(range);
   }
@@ -76,6 +102,8 @@ export class SolidityTextDocument implements TextDocument {
   // File AST parsed by `solidity-antlr4`
   public ast: SourceUnit | null = null;
   public tokens: SyntaxToken[] = [];
+  // export items
+  public exports: SolidityExportItem[] = [];
 
   public constructor(uri: string, languageId: string, version: number, content: string) {
     this._textDocument = TextDocument.create(uri, languageId, version, content);
@@ -92,21 +120,21 @@ export class SolidityTextDocument implements TextDocument {
    */
   private async init() {
     try {
+      // get document content
       const content = this.getText();
       if (!content) return;
+
+      // parse ast and tokens
       this.ast = parse<SourceUnit>(content, { tolerant: true });
       this.tokens = tokenizer(content, { tolerant: true });
+      if (!this.ast) return;
 
-      // resolve imports
-      const importDirectives = this.ast.nodes.filter(
-        (n) => n.type === 'ImportDirective',
-      ) as ImportDirective[];
-      await Promise.all(
-        importDirectives.map(async (n) => {
-          const importPath = this.resolvePath(n.path.name).toString(true);
-          await this.resolveDocument(importPath);
-        }),
-      );
+      // resolve import documents
+      const importUriList = this.getImportUris();
+      await Promise.all(importUriList.map(this.resolveDocument));
+
+      // get export items
+      this.exports = this.getExportItems();
     } catch (error) {
       // ignore
       console.error(error);
@@ -121,6 +149,50 @@ export class SolidityTextDocument implements TextDocument {
         ],
       });
     }
+  }
+
+  /**
+   * Get imported uri list
+   * @returns imported uri list
+   */
+  public getImportUris() {
+    const result: string[] = [];
+    (this.ast?.nodes ?? []).forEach((n) => {
+      if (n.type === 'ImportDirective') {
+        const importPath = this.resolvePath(n.path.name).toString(true);
+        result.push(importPath);
+      }
+    });
+    return result;
+  }
+
+  /**
+   * Get exported items for current document
+   * @returns exports
+   */
+  public getExportItems() {
+    const uri = this.uri;
+    const result: SolidityExportItem[] = [];
+    if (!this.ast) return result;
+
+    (this?.ast?.nodes || []).forEach((node) => {
+      switch (node.type) {
+        case 'ContractDefinition':
+        case 'EnumDefinition':
+        case 'ErrorDefinition':
+        case 'FunctionDefinition':
+        case 'StructDefinition':
+        case 'VariableDeclaration':
+          result.push({ node, uri, name: node.name!.name });
+          break;
+        case 'UserDefinedValueTypeDefinition':
+          result.push({ node, uri, name: node.name });
+          break;
+        default:
+          break;
+      }
+    });
+    return result;
   }
 
   /**
@@ -144,8 +216,8 @@ export class SolidityTextDocument implements TextDocument {
    */
   public getNodeRange<T extends SyntaxNode>(n?: T): Range {
     return {
-      start: this.positionAt(n?.range?.[0] ?? 0),
-      end: this.positionAt((n?.range?.[1] ?? 0) + 1),
+      start: this.positionAt(n?.range[0] ?? 0),
+      end: this.positionAt((n?.range[1] ?? 0) + 1),
     };
   }
 
@@ -153,6 +225,8 @@ export class SolidityTextDocument implements TextDocument {
    * 从 AST Tree 中找到当前位置的所有 Node List
    * @param position vscode position
    * @returns Path[]
+   *
+   * @deprecated
    */
   public getNodesAt<T extends SyntaxNode = SyntaxNode>(
     position: Position,
@@ -176,43 +250,30 @@ export class SolidityTextDocument implements TextDocument {
    * @description visitors 不具有优先级，返回最后一个（最深的）
    * @param position vscode position
    * @returns [Node, ParentNode]
+   *
+   * @deprecated
    */
   public getNodeAt<T extends SyntaxNode = SyntaxNode>(
     position: Position,
     filters: QueryFilter[] = [],
-  ) {
+  ): TraversePath<T> | null {
     const paths = this.getNodesAt<T>(position, filters);
     const target = paths[paths.length - 1];
     return target ?? null;
   }
 
-  // public getIdentifierReferenceNode(identifier: astTypes.Identifier) {
-  //   const name = identifier.name;
-  //   const variables: astTypes.VariableDeclaration[] = [];
+  public createPositionSelector(position?: Position) {
+    const offset = position ? this.offsetAt(position) : undefined;
+    return (filter: SelectorFilter) => createSelector(filter, offset);
+  }
 
-  //   visit(this.ast, {
-  //     VariableDeclaration: (n) => {
-  //       if (n.name === name) {
-  //         variables.push(n);
-  //       }
-  //     },
-  //   });
+  public getPathsAt<T extends SyntaxNode = SyntaxNode>(selector: Selector): TraversePath<T>[] {
+    return query<T>(this.ast!, selector, { queryAll: true, order: 'asc' });
+  }
 
-  //   let offsetGap = Number.MAX_SAFE_INTEGER;
-  //   const offset = identifier.range?.[0] ?? 0;
-  //   let target: astTypes.ASTNode = null;
-
-  //   // 找到最近的一个并返回
-  //   variables.forEach((variable) => {
-  //     const gap = Math.abs((variable.range?.[0] ?? 0) - offset);
-  //     if (gap < offsetGap) {
-  //       offsetGap = gap;
-  //       target = variable;
-  //     }
-  //   });
-
-  //   return target;
-  // }
+  public getPathAt<T extends SyntaxNode = SyntaxNode>(selector: Selector): TraversePath<T> | null {
+    return query<T>(this.ast!, selector, { queryAll: true, order: 'desc' })?.[0] ?? null;
+  }
 
   public resolvePath = (target: string): vscodeUri.URI => {
     let resultUri: vscodeUri.URI;

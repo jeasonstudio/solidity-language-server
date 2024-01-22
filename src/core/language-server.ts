@@ -3,7 +3,7 @@ import { Context } from './context';
 import { documents } from './common/text-documents';
 import { onExit, onInitialize, onInitialized } from './initialize';
 import { enableDebug } from './common/debug';
-import { onHover, onDefinition, onDocumentLinks } from './definition';
+import { onHover, onDefinition, onDocumentLinks, onTypeDefinition } from './definition';
 import { onDocumentSymbol } from './symbol';
 import { onDocumentFormatting } from './format';
 import { onSignatureHelp } from './completion';
@@ -23,7 +23,10 @@ export const listen = (connection: Connection) => {
   // Command hooks
   // connection.onCompletion(onCompletion(context));
   connection.onSignatureHelp(onSignatureHelp(context));
+
+  // definition
   connection.onDefinition(onDefinition(context));
+  connection.onTypeDefinition(onTypeDefinition(context));
   connection.onHover(onHover(context));
   connection.onDocumentLinks(onDocumentLinks(context));
   // connection.onCodeLens(onCodeLens(context));

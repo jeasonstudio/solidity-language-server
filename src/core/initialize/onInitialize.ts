@@ -29,6 +29,7 @@ export const onInitialize =
           triggerCharacters: ['(', ','],
         },
         definitionProvider: true,
+        typeDefinitionProvider: true,
         hoverProvider: true,
         documentLinkProvider: { resolveProvider: false },
         // codeLensProvider: {

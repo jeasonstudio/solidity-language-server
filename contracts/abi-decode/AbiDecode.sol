@@ -21,9 +21,17 @@ contract AbiDecode {
     )
         external
         pure
-        returns (uint x, address addr, uint[] memory arr, MyStruct memory myStruct)
+        returns (
+            uint x,
+            address addr,
+            uint[] memory arr,
+            MyStruct memory myStruct
+        )
     {
         // (uint x, address addr, uint[] memory arr, MyStruct myStruct) = ...
-        (x, addr, arr, myStruct) = abi.decode(data, (uint, address, uint[], MyStruct));
+        (x, addr, arr, myStruct) = abi.decode(
+            data,
+            (uint, address, uint[], MyStruct)
+        );
     }
 }

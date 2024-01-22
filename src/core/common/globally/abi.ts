@@ -24,7 +24,6 @@ const completions: GloballyVariableMap = {
       expression: { type: 'Identifier', name: 'abi' },
       memberName: 'decode',
     },
-
     parameters: ['bytes memory encodedData', '...'],
   },
   'abi.encode': {

@@ -12,8 +12,6 @@ contract Foo {
     }
 
     function myFunc(uint x) public pure returns (string memory) {
-        addmod(x, y)
-
         require(x != 0, "require failed");
         return "my func was called";
     }

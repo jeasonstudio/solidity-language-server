@@ -7,7 +7,7 @@ echidna-test TestEchidna.sol --contract TestCounter
 contract Counter {
     uint public count;
 
-    function inc() external {
+    function inc() public {
         count += 1;
     }
 
@@ -30,6 +30,10 @@ contract TestCounter is Counter {
         // Test will fail. Echidna is smart enough to call Counter.inc() more
         // than 5 times.
         return count <= 5;
+    }
+
+    function test() public {
+        inc();
     }
 }
 
